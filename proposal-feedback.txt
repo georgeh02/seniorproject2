@@ -1,0 +1,34 @@
+
+
+Evaluation and Feedback
+CMSI 4072 project ~ Spring 2024
+George Harrison
+WaveX project
+==============================
+
+Proposal Document:
+------------------
+   Nice work on the document.  The description is at high enough level to
+   give the reader an overview, and yet low enough level to let the reader
+   know your project can do.  This section is very complete!
+
+   The justification section is also well done.  I like that you have some
+   self-reflection in there, how you will improve your C++ skills to a new
+   context, so you'll be challenging yourself.  Good!  DSP is not only a
+   useful technology in music, but also finds extensive use in all forms of
+   communications from satellites to cell phones...
+
+Proposal Presentation:
+----------------------
+   Good job on the presentation!  Although the slide information is minimal,
+   all the required 'stuff' is there.  You really seem to know your subject
+   and that came across during the presentation.  With only one technology
+   you could have elaborated a bit more in the slides ~ what does 'Juice'
+   offer for your project, and what parts of it will you leverage to make it
+   a unique product?
+
+
+=============================================================================
+your score:  5% out of 5% which is an A-plus
+
+Great job on this presentation and proposal and great start to the semester!
