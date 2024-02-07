@@ -86,6 +86,8 @@ As a music producer, I want low CPU usage, so that it runs smoothly on my comput
 ### Child 4
 As a music producer, I want seamless integration with my Digital Audio Workstation, so that I can send MIDI notes to my VST
 #### Acceptance Criteria
+- Verify that the VST's specified functionality is consistent in both FL Studio and Ableton Live
+- Verify that the VST's specified functionality is consistent on both Mac and Windows operating systems
 - Verify that the VST correctly detects and responds to MIDI note-on and note-off messages received from the DAW
 - Verify that MIDI notes trigger the corresponding sounds within the plugin according to the configured parameters and settings
 - Verify that the VST can handle up to 8 voices of polyphony
