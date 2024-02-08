@@ -69,7 +69,7 @@ As a music producer, I want an organized and clean GUI, so that it’s easy to l
 - Verify that each section and control of the VST is accurately labelled
 
 ## Epic 3
-As a music producer, I want optimized performanc, so that the VST will operate smoothly on my computer
+As a music producer, I want optimized performance, so that the VST will operate smoothly on my computer
 
 ### Child 1
 As a music producer, I want low latency, so that my VST runs smoothly
