@@ -1,0 +1,35 @@
+
+
+Evaluation and Feedback
+CMSI 4072 project ~ Spring 2024
+George Harrison
+WaveX project
+==============================
+
+Software Requirements Specification Document:
+---------------------------------------------
+-- Introduction Section
+   It would be helpful to have some sort of introduction to the document, to
+   make sure that the reader knows some context for the user stories.  It
+   doesn't have to be extensive, just a very high-level overview.
+
+-- Functional Requirements
+   These are very good and your acceptance criteria seem very complete!
+
+-- Performance Requirements
+   I like the way you worked the performance requirements into the epics and
+   child stories ~ you almost snuck that by me, George!
+
+-- Environment Requirements
+   This would be a very useful section to fill in, even if it's not in the
+   Agile format, just so that people will know what is needed to develop and
+   to deploy the application.  Even if it is designed to operate in a web
+   browser, it's helpful to know that fact.
+
+=============================================================================
+your score:  9% out of 10% which is an A-minus
+
+All in all, a GREAT first effort, you just need to fill in more specifics.
+
+Make the changes as suggested above, including many more requirements for
+the second submission and you'll get the full 10% on this document.
