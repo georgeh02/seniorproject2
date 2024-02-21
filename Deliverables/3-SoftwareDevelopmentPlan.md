@@ -1,10 +1,11 @@
 # WaveX - Software Development Plan
 
 ## 4.1   Plan Introduction
-This Software Development Plan details the planned development for the WaveX softare synthesizer, which provides users with the ability to design and play sounds for use in audio production.
+This Software Development Plan details the planned development for the WaveX softare synthesizer, which provides users with the ability to design sounds for use in audio production.
 
-WaveX will feature a variety of sound design tools including 2 oscillators, an ADSR envelope, a filter, an LFO, and reverb and delay effects. These tools will allow a user to
-shape the sound to their liking. WaveX will be made in the VST format, meaning MIDI compatability 
+WaveX will feature a variety of sound design tools including 2 oscillators, an ADSR envelope, a filter, reverb and delay effects. These tools will allow a user to
+shape the sound to their liking. Additionally, since WaveX will be made in the VST format, it can be used within DAW's to sequence MIDI notes 
+WaveX will be made in the VST format, meaning MIDI compatability 
 
 
 ## 4.1.1 Project Deliverables
@@ -67,9 +68,7 @@ The major functions of the project are divided as follows
 This section provides schedule information for the WaveX project
 
 ## 4.4.1 GANTT Chart
-
+![GANTT CHART](https://github.com/georgeh02/seniorproject2/blob/main/Deliverables/GANTT_V1.png)
 
 ## 4.4.2 Task / Resource Table
-
-
-## 4.4.3 Class Schedule (optional)
+All tasks will be handled by one person, using all resources mentioned in section 4.2
