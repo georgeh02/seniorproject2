@@ -1,12 +1,29 @@
 # WaveX - Software Development Plan
+## TABLE OF CONTENTS
+**4.1   Plan Introduction** \
+**4.1.1 Project Deliverables** \
+**4.2   Project Resources** \
+**4.2.1 Hardware Resources** \
+**4.2.2 Software Resources** \
+**4.3   Project Organization** \
+**4.4   Project Schedule** \
+**4.4.1 GANTT Chart** \
+**4.4.2 Task / Resource Table**
+
 
 ## 4.1   Plan Introduction
-This Software Development Plan details the planned development for the WaveX softare synthesizer, which provides users with the ability to design sounds for use in audio production.
+This Software Development Plan details the planned development for the WaveX softare synthesizer, which provides users with the ability to design sounds for use in music production.
 
 WaveX will feature a variety of sound design tools including 2 oscillators, an ADSR envelope, a filter, reverb and delay effects. These tools will allow a user to
-shape the sound to their liking. Additionally, since WaveX will be made in the VST format, it can be used within DAW's to sequence MIDI notes 
-WaveX will be made in the VST format, meaning MIDI compatability 
+shape the sound to their liking. Additionally, since WaveX will be made in the VST format, it can be used as a plugin within DAWs, allowing users to utilize it in their productions. Finally WaveX will be packaged in a clean and organized GUI to make it easily usable by music producers.
 
+**Deliverables**
+- Written Status Report (Every other Monday starting Week 8)
+- Updated Software Development Plan (Week 12)
+- Updated Requirements Specification (Week 13)
+- Preliminary Demonstration (Week 13/14)
+- Preliminary Poster (Week 14)
+- Final Product (Week 16)
 
 ## 4.1.1 Project Deliverables
 - Written Status Report (Every other Monday starting Week 8)
@@ -30,11 +47,11 @@ WaveX will be made in the VST format, meaning MIDI compatability
 This section provides resource information for the WaveX project
 
 ## 4.2.1 Hardware Resources
-The project will be developed on a 2019 i9 8-core MacBook Pro with 32GB of ram.
-It will also be tested on a 2021 M1 Max MacBook Pro with 64GB of ram.
-A Native Instruments A49 MIDI controller will be used as well to test MIDI functionality of the project, however is not required to use the software.
-WaveX will only be tested on the development laptop running MacOS, as such it will only officially support the MacOS operating system.
-The execution of the final project will only require a modern computer running MacOS.
+The project will be developed on a 2019 i9 8-core MacBook Pro with 32GB of ram. It will also be tested on a 2021 M1 Max MacBook Pro with 64GB of ram. 
+
+A Native Instruments A49 MIDI controller will be used as well to test MIDI functionality of the project, however is not required to use the software. 
+
+WaveX will only be tested on MacOS, as such it will only officially support the MacOS operating system. The execution of the final project will only require a modern computer running MacOS.
 
 ## 4.2.2 Software Resources
 The software / OS planned to be used for this development is listed below
@@ -46,7 +63,7 @@ The software / OS planned to be used for this development is listed below
 - FL Studio 21
 
 ## 4.3   Project Organization
-The major functions of the project are divided as follows
+The major functions of the project are divided as follows. Each function will be completed to meet the functionality listed in the Requirements Specification document.
 - Sound Design
     - This will be the bulk of the project and the first section to be completed
     - It will include implementing all the sound design features of the synth
@@ -60,7 +77,7 @@ The major functions of the project are divided as follows
 - GUI
     - A basic skeleton for the GUI will be developed alongside the prior sections, however it will be fully polished and finalized once the other parts are completed
 - Stretch Goals
-  - If progress is faster than expected, this feature will be added to the sound design section of the synth. The GUI will have to be adjusted as well to incorporate this section
+  - If the preset browser and GUI are completed faster than expected, this feature will be added to the sound design section of the synth. The GUI will have to be adjusted as well to incorporate this section
     - LFO
 
 
