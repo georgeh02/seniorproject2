@@ -17,12 +17,13 @@ bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound)
 
 void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound *sound, int currentPitchWheelPosition)
 {
-    
+    osc.setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber));
+    adsr.noteOn();
 }
 
 void SynthVoice::stopNote(float velocity, bool allowTailOff)
 {
-    
+    adsr.noteOff();
 }
 
 void SynthVoice::controllerMoved(int controllerNumber, int newControllerValue)
@@ -37,6 +38,8 @@ void SynthVoice::pitchWheelMoved (int newPitchWheelValue)
 
 void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels)
 {
+    adsr.setSampleRate(sampleRate);
+    
     juce::dsp::ProcessSpec spec;
     spec.maximumBlockSize = samplesPerBlock;
     spec.sampleRate = sampleRate;
@@ -45,16 +48,28 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     osc.prepare(spec);
     gain.prepare(spec);
     
-    osc.setFrequency(220.0f);
-    gain.setGainLinear(0.01f);
+    gain.setGainLinear(0.03f);
     
     isPrepared = true;
 }
 
-void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int StartSample, int numSamples)
+void SynthVoice::updateADSR(const float attack, const float decay, const float sustain, const float release)
 {
-    juce::dsp::AudioBlock<float> audioBlock {outputBuffer};
+    adsrParams.attack = attack;
+    adsrParams.decay = decay;
+    adsrParams.sustain = sustain;
+    adsrParams.release = release;
+    
+    adsr.setParameters(adsrParams);
+}
+
+void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples)
+{
+    jassert(isPrepared);
+    
+    juce::dsp::AudioBlock<float> audioBlock {outputBuffer, (size_t)startSample};
     osc.process(juce::dsp::ProcessContextReplacing<float> (audioBlock));
     gain.process(juce::dsp::ProcessContextReplacing<float> (audioBlock));
-    jassert(isPrepared);
+    
+    adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
 }

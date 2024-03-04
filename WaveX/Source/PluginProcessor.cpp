@@ -19,7 +19,7 @@ WaveXAudioProcessor::WaveXAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ), apvts (*this, nullptr, "Parameters", createParams())
 #endif
 {
     synth.addSound(new SynthSound());
@@ -95,9 +95,15 @@ void WaveXAudioProcessor::changeProgramName (int index, const juce::String& newN
 //==============================================================================
 void WaveXAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-
-    
     synth.setCurrentPlaybackSampleRate(sampleRate);
+    
+    for (int i=0; i < synth.getNumVoices(); i++)
+    {
+        if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
+        {
+            voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
+        }
+    }
 }
 
 void WaveXAudioProcessor::releaseResources()
@@ -143,11 +149,18 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
 
     for(int i=0; i<synth.getNumVoices(); ++i)
     {
-        if (auto voice = dynamic_cast<juce::SynthesiserVoice*>(synth.getVoice(i)))
+        if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
         {
             // Osc controls
             // ADSR
             // LFO
+            
+            auto& attack = *apvts.getRawParameterValue("ATTACK");
+            auto& decay = *apvts.getRawParameterValue("DECAY");
+            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
+            auto& release = *apvts.getRawParameterValue("RELEASE");
+            
+            voice->updateADSR(attack.load(), decay.load(), sustain.load(), release.load());
         }
     }
     
@@ -186,4 +199,18 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
     return new WaveXAudioProcessor();
 }
 
-// Value Tree...
+juce::AudioProcessorValueTreeState::ParameterLayout WaveXAudioProcessor::createParams()
+{
+    std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+
+    // OSC select
+    params.push_back (std::make_unique<juce::AudioParameterChoice> (juce::ParameterID{ "OSC",  1 }, "Oscillator", juce::StringArray { "Sine", "Saw", "Square" }, 0));
+
+    // ADSR
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "ATTACK",  1 }, "Attack", juce::NormalisableRange<float> { 0.1f, 1.0f, }, 0.1f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "DECAY",  1 }, "Decay", juce::NormalisableRange<float> { 0.1f, 1.0f, }, 0.1f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "SUSTAIN",  1 }, "Sustain", juce::NormalisableRange<float> { 0.1f, 1.0f, }, 1.0f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "RELEASE",  1 }, "Release", juce::NormalisableRange<float> { 0.1f, 3.0f, }, 0.4f));
+
+    return { params.begin(), params.end() };
+}
