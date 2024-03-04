@@ -22,6 +22,8 @@ WaveXAudioProcessor::WaveXAudioProcessor()
                        )
 #endif
 {
+    synth.addSound(new SynthSound());
+    synth.addVoice(new SynthVoice());
 }
 
 WaveXAudioProcessor::~WaveXAudioProcessor()
@@ -93,18 +95,9 @@ void WaveXAudioProcessor::changeProgramName (int index, const juce::String& newN
 //==============================================================================
 void WaveXAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
-    juce::dsp::ProcessSpec spec;
-    spec.maximumBlockSize = samplesPerBlock;
-    spec.sampleRate = sampleRate;
-    spec.numChannels = getTotalNumOutputChannels();
+
     
-    osc.prepare(spec);
-    gain.prepare(spec);
-    
-    osc.setFrequency(220.0f);
-    gain.setGainLinear(0.01f);
+    synth.setCurrentPlaybackSampleRate(sampleRate);
 }
 
 void WaveXAudioProcessor::releaseResources()
@@ -148,16 +141,17 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    juce::dsp::AudioBlock<float> audioBlock {buffer};
-    osc.process(juce::dsp::ProcessContextReplacing<float> (audioBlock));
-    gain.process(juce::dsp::ProcessContextReplacing<float> (audioBlock));
-
-//    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-//    {
-//        auto* channelData = buffer.getWritePointer (channel);
-//
-//        // ..do something to the data...
-//    }
+    for(int i=0; i<synth.getNumVoices(); ++i)
+    {
+        if (auto voice = dynamic_cast<juce::SynthesiserVoice*>(synth.getVoice(i)))
+        {
+            // Osc controls
+            // ADSR
+            // LFO
+        }
+    }
+    
+    synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }
 
 //==============================================================================
@@ -191,3 +185,5 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new WaveXAudioProcessor();
 }
+
+// Value Tree...
