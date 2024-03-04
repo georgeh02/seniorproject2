@@ -67,9 +67,15 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int sta
 {
     jassert(isPrepared);
     
-    juce::dsp::AudioBlock<float> audioBlock {outputBuffer, (size_t)startSample};
-    osc.process(juce::dsp::ProcessContextReplacing<float> (audioBlock));
-    gain.process(juce::dsp::ProcessContextReplacing<float> (audioBlock));
+    if (!isVoiceActive()) return;
     
+    auto audioBlock = juce::dsp::AudioBlock<float>(outputBuffer).getSubBlock(startSample, numSamples);
+    juce::dsp::ProcessContextReplacing<float> context(audioBlock);
+
+    osc.process(context);
+    gain.process(context);
     adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
+    
+    if (!adsr.isActive())
+        clearCurrentNote();
 }
