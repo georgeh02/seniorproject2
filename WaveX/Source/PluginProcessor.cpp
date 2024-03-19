@@ -160,7 +160,12 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
             auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
             auto& release = *apvts.getRawParameterValue("RELEASE");
             
-            voice->updateADSR(attack.load(), decay.load(), sustain.load(), release.load());
+            auto& osc1WaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
+            auto& osc2WaveChoice = *apvts.getRawParameterValue("OSC2WAVETYPE");
+            
+            voice->update(attack.load(), decay.load(), sustain.load(), release.load());
+            voice->getOscillator(0).setWaveType(osc1WaveChoice);
+            voice->getOscillator(1).setWaveType(osc2WaveChoice);
         }
     }
     
@@ -203,14 +208,15 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveXAudioProcessor::createP
 {
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
 
-    // OSC select
-    params.push_back (std::make_unique<juce::AudioParameterChoice> (juce::ParameterID{ "OSC",  1 }, "Oscillator", juce::StringArray { "Sine", "Saw", "Square" }, 0));
-
     // ADSR
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "ATTACK",  1 }, "Attack", juce::NormalisableRange<float> { 0.1f, 1.0f, }, 0.1f));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "DECAY",  1 }, "Decay", juce::NormalisableRange<float> { 0.1f, 1.0f, }, 0.1f));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "SUSTAIN",  1 }, "Sustain", juce::NormalisableRange<float> { 0.1f, 1.0f, }, 1.0f));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "RELEASE",  1 }, "Release", juce::NormalisableRange<float> { 0.1f, 3.0f, }, 0.4f));
 
+    params.push_back (std::make_unique<juce::AudioParameterChoice>(juce::ParameterID{"OSC1WAVETYPE", 1}, "Osc 1 Wave Type", juce::StringArray{"Sine", "Saw", "Square"}, 0));
+    
+    params.push_back (std::make_unique<juce::AudioParameterChoice>(juce::ParameterID{"OSC2WAVETYPE", 1}, "Osc 1 Wave Type", juce::StringArray{"Sine", "Saw", "Square"}, 0));
+    
     return { params.begin(), params.end() };
 }

@@ -5,6 +5,20 @@
               pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn">
   <MAINGROUP id="PDci70" name="WaveX">
     <GROUP id="{E9D0970A-0789-7FCA-D45A-D1A5B54CDDB6}" name="Source">
+      <GROUP id="{DABDCA76-7553-E206-A111-039000069968}" name="Data">
+        <FILE id="XFw9OE" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>
+        <FILE id="Zlnhvy" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
+        <FILE id="n7MzlU" name="AdsrData.h" compile="0" resource="0" file="Source/Data/AdsrData.h"/>
+        <FILE id="kKCXcS" name="AdsrData.cpp" compile="1" resource="0" file="Source/Data/AdsrData.cpp"/>
+      </GROUP>
+      <GROUP id="{022B60FC-0BD9-3741-AC6B-7EC9E16FF1BE}" name="UI">
+        <FILE id="Kj93jW" name="AdsrComponent.cpp" compile="1" resource="0"
+              file="Source/UI/AdsrComponent.cpp"/>
+        <FILE id="eyGI1T" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/AdsrComponent.h"/>
+        <FILE id="T3O8Ed" name="OscComponent.cpp" compile="1" resource="0"
+              file="Source/UI/OscComponent.cpp"/>
+        <FILE id="zsiMY8" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>
+      </GROUP>
       <FILE id="RppbCW" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="gEjHFY" name="PluginProcessor.h" compile="0" resource="0"
