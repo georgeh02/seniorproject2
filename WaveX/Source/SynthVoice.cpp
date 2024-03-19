@@ -48,9 +48,8 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     
     oscillators[0].prepareToPlay(spec);
     oscillators[1].prepareToPlay(spec);
-    gain.prepare(spec);
-    
-    gain.setGainLinear(0.03f);
+    globalGain.prepare(spec);
+    globalGain.setGainLinear(0.03f);
     
     isPrepared = true;
 }
@@ -71,7 +70,7 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int sta
 
     oscillators[0].getNextAudioBlock(context);
     oscillators[1].getNextAudioBlock(context);
-    gain.process(context);
+    globalGain.process(context);
     adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
     
     if (!adsr.isActive())

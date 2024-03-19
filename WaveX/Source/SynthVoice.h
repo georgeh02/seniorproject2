@@ -33,10 +33,8 @@ private:
     AdsrData adsr;
 
     std::array<OscData, 2> oscillators;
-//    OscData osc1;
-//    OscData osc2;
     
-    juce::dsp::Gain<float> gain;
+    juce::dsp::Gain<float> globalGain;
     bool isPrepared {false};
     
 

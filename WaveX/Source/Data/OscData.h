@@ -17,6 +17,8 @@ public:
     void prepareToPlay(juce::dsp::ProcessSpec& spec);
     void setWaveType(const int choice);
     void setWaveFrequency(const int midiNoteNumber);
+    void setOscGain(float gain);
     void getNextAudioBlock(juce::dsp::ProcessContextReplacing<float>& context);
 private:
+    juce::dsp::Gain<float> oscGain;
 };
