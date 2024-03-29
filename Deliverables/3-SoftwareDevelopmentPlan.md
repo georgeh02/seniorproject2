@@ -85,7 +85,7 @@ The major functions of the project are divided as follows. Each function will be
 This section provides schedule information for the WaveX project
 
 ## 4.4.1 GANTT Chart
-![GANTT CHART](https://github.com/georgeh02/seniorproject2/blob/main/Deliverables/GANTT_V1.png)
+![GANTT CHART](https://github.com/georgeh02/seniorproject2/blob/main/Deliverables/GANTT_V2.png)
 
 ## 4.4.2 Task / Resource Table
 All tasks will be handled by one person, using all resources mentioned in section 4.2
