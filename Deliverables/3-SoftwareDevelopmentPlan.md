@@ -77,7 +77,7 @@ The major functions of the project are divided as follows. Each function will be
 - GUI
     - A basic skeleton for the GUI will be developed alongside the prior sections, however it will be fully polished and finalized once the other parts are completed
 - Stretch Goals
-  - If the preset browser and GUI are completed faster than expected, this feature will be added to the sound design section of the synth. The GUI will have to be adjusted as well to incorporate this section
+  - If GUI is completed faster than expected, this feature will be added to the sound design section of the synth. The GUI will have to be adjusted as well to incorporate this section
     - LFO
 
 
