@@ -48,8 +48,8 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     
     oscillators[0].prepareToPlay(spec);
     oscillators[1].prepareToPlay(spec);
-    globalGain.prepare(spec);
-    globalGain.setGainLinear(0.03f);
+//    globalGain.prepare(spec);
+//    globalGain.setGainLinear(0.03f);
     
     isPrepared = true;
 }
@@ -65,12 +65,16 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int sta
     
     if (!isVoiceActive()) return;
     
+    // Separate context for each osc
     auto audioBlock = juce::dsp::AudioBlock<float>(outputBuffer).getSubBlock(startSample, numSamples);
-    juce::dsp::ProcessContextReplacing<float> context(audioBlock);
+    juce::dsp::ProcessContextReplacing<float> context1(audioBlock);
+    juce::dsp::ProcessContextReplacing<float> context2(audioBlock);
 
-    oscillators[0].getNextAudioBlock(context);
-    oscillators[1].getNextAudioBlock(context);
-    globalGain.process(context);
+    oscillators[0].getNextAudioBlock(context1);
+    oscillators[1].getNextAudioBlock(context2);
+//    globalGain.process(context);
+    
+    
     adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
     
     if (!adsr.isActive())

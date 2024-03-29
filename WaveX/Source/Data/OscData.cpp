@@ -52,6 +52,7 @@ void OscData::setOscGain(float gain)
 
 void OscData::getNextAudioBlock(juce::dsp::ProcessContextReplacing<float>& context)
 {
+ 
     process(context);
     oscGain.process(context);
 }

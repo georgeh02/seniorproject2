@@ -225,9 +225,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveXAudioProcessor::createP
     
     params.push_back (std::make_unique<juce::AudioParameterChoice>(juce::ParameterID{"OSC2WAVETYPE", 1}, "Osc 1 Wave Type", juce::StringArray{"Sine", "Saw", "Square"}, 0));
     
-    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC1GAIN",  1 }, "Osc 1 Gain", juce::NormalisableRange<float> { 0.1f, 3.0f, }, 0.1f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC1GAIN",  1 }, "Osc 1 Gain", juce::NormalisableRange<float> { 0.0f, 3.0f, }, 0.1f));
     
-    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC2GAIN",  1 }, "Osc 2 Gain", juce::NormalisableRange<float> { 0.1f, 3.0f, }, 0.1f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC2GAIN",  1 }, "Osc 2 Gain", juce::NormalisableRange<float> { 0.0f, 3.0f, }, 0.1f));
     
     return { params.begin(), params.end() };
 }

@@ -19,10 +19,11 @@ OscComponent::OscComponent(juce::AudioProcessorValueTreeState& apvts, juce::Stri
     addAndMakeVisible(oscWaveSelector);
     oscWaveSelectorAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, waveSelectorId, oscWaveSelector);
     
+    oscGainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, gainSelectorId, oscGainSlider);
     oscGainSlider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
     oscGainSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
     addAndMakeVisible(oscGainSlider);
-    oscGainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, gainSelectorId, oscGainSlider);
+
 }
 
 OscComponent::~OscComponent()
@@ -37,5 +38,6 @@ void OscComponent::paint (juce::Graphics& g)
 void OscComponent::resized()
 {
     oscWaveSelector.setBounds(0,0,90,20);
-    oscGainSlider.setBounds(0, 50, 90, 20);
+
+    oscGainSlider.setBounds(0, 0, 20, 200);
 }

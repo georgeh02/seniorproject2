@@ -32,8 +32,8 @@ void WaveXAudioProcessorEditor::paint (juce::Graphics& g)
 
 void WaveXAudioProcessorEditor::resized()
 {
-    osc1.setBounds(10,10, 100, 30);
-    osc2.setBounds(50,10, 100, 30);
+    osc1.setBounds(10,10, 100, 200);
+    osc2.setBounds(150,10, 100, 200);
     adsr.setBounds(getWidth()/2, 0, getWidth() / 2, getHeight());
 }
 
