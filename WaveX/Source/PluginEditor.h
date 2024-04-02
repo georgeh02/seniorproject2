@@ -12,6 +12,7 @@
 #include "PluginProcessor.h"
 #include "UI/AdsrComponent.h"
 #include "UI/OscComponent.h"
+#include "UI/FilterComponent.h"
 
 //==============================================================================
 /**
@@ -31,6 +32,7 @@ private:
     OscComponent osc1;
     OscComponent osc2;
     AdsrComponent adsr;
+    FilterComponent filter;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (WaveXAudioProcessorEditor)
 };

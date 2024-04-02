@@ -6,6 +6,8 @@
   <MAINGROUP id="PDci70" name="WaveX">
     <GROUP id="{E9D0970A-0789-7FCA-D45A-D1A5B54CDDB6}" name="Source">
       <GROUP id="{DABDCA76-7553-E206-A111-039000069968}" name="Data">
+        <FILE id="sFmHSn" name="FilterData.cpp" compile="1" resource="0" file="Source/Data/FilterData.cpp"/>
+        <FILE id="OqLcuE" name="FilterData.h" compile="0" resource="0" file="Source/Data/FilterData.h"/>
         <FILE id="XFw9OE" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>
         <FILE id="Zlnhvy" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
         <FILE id="n7MzlU" name="AdsrData.h" compile="0" resource="0" file="Source/Data/AdsrData.h"/>
@@ -15,6 +17,10 @@
         <FILE id="Kj93jW" name="AdsrComponent.cpp" compile="1" resource="0"
               file="Source/UI/AdsrComponent.cpp"/>
         <FILE id="eyGI1T" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/AdsrComponent.h"/>
+        <FILE id="s0QLMq" name="FilterComponent.cpp" compile="1" resource="0"
+              file="Source/UI/FilterComponent.cpp"/>
+        <FILE id="HwGa1c" name="FilterComponent.h" compile="0" resource="0"
+              file="Source/UI/FilterComponent.h"/>
         <FILE id="T3O8Ed" name="OscComponent.cpp" compile="1" resource="0"
               file="Source/UI/OscComponent.cpp"/>
         <FILE id="zsiMY8" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>
