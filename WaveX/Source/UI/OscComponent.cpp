@@ -53,11 +53,11 @@ void OscComponent::resized()
     const auto boxHeight = 20;
     const auto bounds = getLocalBounds().reduced(padding);
     
-    oscWaveSelector.setBounds (padding, bounds.getHeight() - padding, bounds.getWidth()/4, boxHeight);
-    oscWaveSelectorLabel.setBounds (oscWaveSelector.getX(), oscWaveSelector.getY()-padding, oscWaveSelector.getWidth(), boxHeight);
+    oscWaveSelector.setBounds (padding, padding * 2, bounds.getWidth()/2, boxHeight);
+    //oscWaveSelectorLabel.setBounds (oscWaveSelector.getX(), padding, oscWaveSelector.getWidth(), boxHeight);
     
-    oscGainSlider.setBounds (oscWaveSelector.getRight(), oscWaveSelector.getY()-padding, bounds.getWidth()/4, bounds.getHeight());
-    oscGainLabel.setBounds (oscGainSlider.getX(), oscWaveSelector.getY()-padding, oscGainSlider.getWidth(), boxHeight);
+    oscGainSlider.setBounds (oscWaveSelector.getRight(), padding * 2, bounds.getWidth()/2, bounds.getHeight() - (padding/2));
+    oscGainLabel.setBounds (oscGainSlider.getX(), padding * 1.5, bounds.getWidth()/2, boxHeight);
 }
 
 void OscComponent::setSliderWithLabel(juce::Slider& slider, juce::Label& label, juce::AudioProcessorValueTreeState& apvts, juce::String paramId, std::unique_ptr<Attachment>& attachment)

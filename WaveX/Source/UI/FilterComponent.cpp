@@ -49,20 +49,18 @@ void FilterComponent::paint (juce::Graphics& g)
 
 void FilterComponent::resized()
 {
-    const auto startY = 55;
-    const auto sliderWidth = 100;
-    const auto sliderHeight = 90;
-    const auto labelYOffset = 20;
-    const auto labelHeight = 20;
+    const auto padding = 25;
+    const auto boxHeight = 20;
+    const auto bounds = getLocalBounds().reduced(padding);
     
-    filterTypeSelector.setBounds(10, startY + 5, 90, 30);
-    filterTypeSelectorLabel.setBounds(10, startY - labelYOffset, 90, labelHeight);
+    filterTypeSelector.setBounds(padding, padding * 3, bounds.getWidth()/3, boxHeight);
+    filterTypeSelectorLabel.setBounds(filterTypeSelector.getX(), filterTypeSelector.getY()-padding, filterTypeSelector.getWidth(), boxHeight);
     
-    filterFreq.setBounds(filterTypeSelectorLabel.getRight(), startY, sliderWidth, sliderHeight);
-    filterFreqLabel.setBounds(filterFreq.getX(), filterFreq.getY() - labelYOffset, filterFreq.getWidth(), labelHeight);
+    filterFreq.setBounds(filterTypeSelectorLabel.getRight(), padding * 3, bounds.getWidth()/3, bounds.getHeight()/2);
+    filterFreqLabel.setBounds(filterFreq.getX(), filterFreq.getY()-padding, filterFreq.getWidth(), boxHeight);
     
-    filterRes.setBounds(filterFreq.getRight(), startY, sliderWidth, sliderHeight);
-    filterResLabel.setBounds(filterRes.getX(), filterRes.getY() - labelYOffset, filterRes.getWidth(), labelHeight);
+    filterRes.setBounds(filterFreq.getRight(), padding * 3, bounds.getWidth()/3, bounds.getHeight()/2);
+    filterResLabel.setBounds(filterRes.getX(), filterRes.getY()-padding, filterRes.getWidth(), boxHeight);
 }
 
 using Attachment = juce::AudioProcessorValueTreeState::SliderAttachment;
