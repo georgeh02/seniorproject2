@@ -1,5 +1,8 @@
 # WaveX - Agile User Stories
 
+## Introduction
+WaveX is a software synthesizer in the VST format (Virtual Studio Technology) designed for music producers and sound designers. WaveX includes a variety of sound design tools to assist with music production.
+
 ## Epic 1
 As a music producer, I want a variety of sound design tools in a VST so that I can create a diverse range of sounds
 
