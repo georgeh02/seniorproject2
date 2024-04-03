@@ -106,6 +106,7 @@ void WaveXAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     }
     
     filter.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
+    delay.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
 }
 
 void WaveXAudioProcessor::releaseResources()
@@ -149,6 +150,9 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
+//    auto bufferSize = buffer.getNumSamples();
+//    audo delayBufferSize = delayBuffer.getNumSamples();
+    
     for(int i=0; i<synth.getNumVoices(); ++i)
     {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
@@ -183,8 +187,12 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     auto& resonance = *apvts.getRawParameterValue("FILTERRES");
 
     filter.updateParameters(filterType, freq, resonance);
-    
     filter.process(buffer);
+    
+    auto& delayTime = *apvts.getRawParameterValue("DELAYTIME");
+    
+    delay.updateParameters(delayTime);
+    delay.process(buffer);
 }
 
 //==============================================================================
@@ -243,6 +251,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveXAudioProcessor::createP
     params.push_back (std::make_unique<juce::AudioParameterChoice>(juce::ParameterID{"FILTERTYPE", 1}, "Filter Type", juce::StringArray{"Low Pass", "Band-Pass", "High-Pass"}, 0));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "FILTERFREQ",  1 }, "Filter Frequency", juce::NormalisableRange<float> { 20.0f, 20000.0f, 0.1f, 0.6f}, 20000.0f));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "FILTERRES",  1 }, "Filter Resonance", juce::NormalisableRange<float> { 0.1f, 10.0f, 0.1f}, 1.0f));
+    
+    // DELAY
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "DELAYTIME",  1 }, "Delay Time", juce::NormalisableRange<float> { 1.0f, 44100.0f, 0.1f}, 1.0f));
     
     return { params.begin(), params.end() };
 }

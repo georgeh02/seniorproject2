@@ -12,6 +12,7 @@
 #include "SynthVoice.h"
 #include "SynthSound.h"
 #include "Data/FilterData.h"
+#include "Data/DelayData.h"
 
 //==============================================================================
 /**
@@ -61,6 +62,7 @@ public:
 private:
     juce::Synthesiser synth;
     FilterData filter;
+    DelayData delay;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
     
     //==============================================================================
