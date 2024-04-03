@@ -23,17 +23,10 @@ OscComponent::OscComponent(juce::String name, juce::AudioProcessorValueTreeState
     
     oscWaveSelectorLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
     oscWaveSelectorLabel.setFont (15.0f);
-    oscWaveSelectorLabel.setJustificationType (juce::Justification::left);
+    oscWaveSelectorLabel.setJustificationType (juce::Justification::centred);
     addAndMakeVisible (oscWaveSelectorLabel);
     
     setSliderWithLabel(oscGainSlider, oscGainLabel, apvts, gainSelectorId, oscGainAttachment);
-    
-    
-//    oscGainAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, gainSelectorId, oscGainSlider);
-//    oscGainSlider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
-//    oscGainSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
-//    addAndMakeVisible(oscGainSlider);
-
 }
 
 OscComponent::~OscComponent()
@@ -49,28 +42,28 @@ void OscComponent::paint (juce::Graphics& g)
     g.setFont(20.0f);
     g.drawText(componentName, labelSpace.withX(10), juce::Justification::left);
     g.drawRoundedRectangle(bounds.toFloat(), 5.0f, 3.0f);
+    
+    //g.setColour(juce::Colours::grey);
+    //g.fillRoundedRectangle(bounds.toFloat(), 5.0f);
 }
 
 void OscComponent::resized()
 {
+    const auto padding = 25;
+    const auto boxHeight = 20;
+    const auto bounds = getLocalBounds().reduced(padding);
     
-    const auto startY = 55;
-    const auto sliderWidth = 100;
-    const auto sliderHeight = 90;
-    const auto labelYOffset = 20;
-    const auto labelHeight = 20;
+    oscWaveSelector.setBounds (padding, bounds.getHeight() - padding, bounds.getWidth()/4, boxHeight);
+    oscWaveSelectorLabel.setBounds (oscWaveSelector.getX(), oscWaveSelector.getY()-padding, oscWaveSelector.getWidth(), boxHeight);
     
-    oscWaveSelector.setBounds (10, startY + 5, 90, 30);
-    oscWaveSelectorLabel.setBounds (10, startY - labelYOffset, 90, labelHeight);
-    
-    oscGainSlider.setBounds (oscWaveSelector.getRight(), startY, sliderWidth, sliderHeight);
-    oscGainLabel.setBounds (oscGainSlider.getX(), oscGainSlider.getY() - labelYOffset, oscGainSlider.getWidth(), labelHeight);
+    oscGainSlider.setBounds (oscWaveSelector.getRight(), oscWaveSelector.getY()-padding, bounds.getWidth()/4, bounds.getHeight());
+    oscGainLabel.setBounds (oscGainSlider.getX(), oscWaveSelector.getY()-padding, oscGainSlider.getWidth(), boxHeight);
 }
 
 void OscComponent::setSliderWithLabel(juce::Slider& slider, juce::Label& label, juce::AudioProcessorValueTreeState& apvts, juce::String paramId, std::unique_ptr<Attachment>& attachment)
 {
     slider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
+    slider.setTextBoxStyle(juce::Slider::TextBoxRight, true, 50, 25);
     addAndMakeVisible(slider);
     
     attachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, paramId, slider);

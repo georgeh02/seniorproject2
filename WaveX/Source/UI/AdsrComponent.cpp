@@ -36,7 +36,7 @@ void AdsrComponent::paint (juce::Graphics& g)
     
     g.setColour(juce::Colours::white);
     g.setFont(20.0f);
-    g.drawText(componentName, labelSpace.withX (10), juce::Justification::left);
+    g.drawText(componentName, labelSpace.withX(10), juce::Justification::left);
     g.drawRoundedRectangle(bounds.toFloat(), 5.0f, 3.0f);
 }
 
