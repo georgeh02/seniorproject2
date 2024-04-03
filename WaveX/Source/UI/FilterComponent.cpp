@@ -38,14 +38,13 @@ FilterComponent::~FilterComponent()
 
 void FilterComponent::paint (juce::Graphics& g)
 {
-    auto bounds = getLocalBounds().reduced(5);
+    auto bounds = getLocalBounds().reduced(10);
     auto labelSpace = bounds.removeFromTop(25.0f);
-    
-    g.fillAll(juce::Colours::black);
+
     g.setColour(juce::Colours::white);
     g.setFont(20.0f);
-    g.drawText("Filter", labelSpace.withX(5), juce::Justification::left);
-    g.drawRoundedRectangle(bounds.toFloat(), 5.0f, 2.0f);
+    g.drawText("Filter", labelSpace.withX(10), juce::Justification::left);
+    g.drawRoundedRectangle(bounds.toFloat(), 5.0f, 3.0f);
 }
 
 void FilterComponent::resized()
