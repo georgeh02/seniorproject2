@@ -12,9 +12,11 @@
 #include "DelayComponent.h"
 
 //==============================================================================
-DelayComponent::DelayComponent(juce::AudioProcessorValueTreeState& apvts, juce::String delayTimeId)
+DelayComponent::DelayComponent(juce::AudioProcessorValueTreeState& apvts, juce::String delayTimeId, juce::String feedbackId, juce::String delayMixId)
 {
     setSliderWithLabel(delayTime, delayTimeLabel, apvts, delayTimeId, delayTimeAttachment);
+    setSliderWithLabel(feedback, feedbackLabel, apvts, feedbackId, feedbackAttachment);
+    setSliderWithLabel(delayMix, delayMixLabel, apvts, delayMixId, delayMixAttachment);
 }
 
 DelayComponent::~DelayComponent()
@@ -42,6 +44,12 @@ void DelayComponent::resized()
     
     delayTime.setBounds(padding, padding * 3, bounds.getWidth()/3, bounds.getHeight()/2);
     delayTimeLabel.setBounds(delayTime.getX(), delayTime.getY()-padding, delayTime.getWidth(), boxHeight);
+    
+    feedback.setBounds(delayTimeLabel.getRight(), padding * 3, bounds.getWidth()/3, bounds.getHeight()/2);
+    feedbackLabel.setBounds(feedback.getX(), feedback.getY()-padding, feedback.getWidth(), boxHeight);
+    
+    delayMix.setBounds(feedbackLabel.getRight(), padding * 3, bounds.getWidth()/3, bounds.getHeight()/2);
+    delayMixLabel.setBounds(delayMix.getX(), delayMix.getY()-padding, delayMix.getWidth(), boxHeight);
 }
 
 void DelayComponent::setSliderWithLabel(juce::Slider& slider, juce::Label& label, juce::AudioProcessorValueTreeState& apvts, juce::String paramId, std::unique_ptr<Attachment>& attachment)

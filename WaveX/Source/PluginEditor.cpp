@@ -17,7 +17,7 @@ WaveXAudioProcessorEditor::WaveXAudioProcessorEditor (WaveXAudioProcessor& p)
 , osc2("Osc B", audioProcessor.apvts, "OSC2WAVETYPE", "OSC2GAIN")
 , adsr ("Amp Envelope", audioProcessor.apvts, "ATTACK", "DECAY", "SUSTAIN", "RELEASE")
 , filter(audioProcessor.apvts, "FILTERTYPE", "FILTERFREQ", "FILTERRES")
-, delay(audioProcessor.apvts, "DELAYTIME")
+, delay(audioProcessor.apvts, "DELAYTIME", "FEEDBACK", "DELAYMIX")
 {
     setSize (600, 600);
     addAndMakeVisible(osc1);

@@ -190,8 +190,10 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     filter.process(buffer);
     
     auto& delayTime = *apvts.getRawParameterValue("DELAYTIME");
+    auto& feedback = *apvts.getRawParameterValue("FEEDBACK");
+    auto& delayMix = *apvts.getRawParameterValue("DELAYMIX");
     
-    delay.updateParameters(delayTime, getSampleRate());
+    delay.updateParameters(delayTime, feedback, delayMix, getSampleRate());
     delay.process(buffer);
 }
 
@@ -254,6 +256,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveXAudioProcessor::createP
     
     // DELAY
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "DELAYTIME",  1 }, "Delay Time", juce::NormalisableRange<float> { 0.0f, 1000.0f, 1.0f}, 500.0f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "FEEDBACK",  1 }, "Feedback", juce::NormalisableRange<float> { -100.0f, 0.0f, 1.0f}, -100.0f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "DELAYMIX",  1 }, "Delay Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.0f));
     
     return { params.begin(), params.end() };
 }
