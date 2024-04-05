@@ -18,6 +18,7 @@ WaveXAudioProcessorEditor::WaveXAudioProcessorEditor (WaveXAudioProcessor& p)
 , adsr ("Amp Envelope", audioProcessor.apvts, "ATTACK", "DECAY", "SUSTAIN", "RELEASE")
 , filter(audioProcessor.apvts, "FILTERTYPE", "FILTERFREQ", "FILTERRES")
 , delay(audioProcessor.apvts, "DELAYTIME", "FEEDBACK", "DELAYMIX")
+//, audioProcessor.visualizer()
 {
     setSize (600, 600);
     addAndMakeVisible(osc1);
@@ -25,6 +26,9 @@ WaveXAudioProcessorEditor::WaveXAudioProcessorEditor (WaveXAudioProcessor& p)
     addAndMakeVisible(adsr);
     addAndMakeVisible(filter);
     addAndMakeVisible(delay);
+    addAndMakeVisible(audioProcessor.visualizer);
+    audioProcessor.visualizer.setColours(juce::Colours::darkred, juce::Colours::whitesmoke);
+
 }
 
 WaveXAudioProcessorEditor::~WaveXAudioProcessorEditor()
@@ -45,6 +49,9 @@ void WaveXAudioProcessorEditor::resized()
 //    filter.setBounds(500, 400, 300, 300);
     
     auto bounds = getLocalBounds();
+    
+    audioProcessor.visualizer.setBounds(0, 100.0f, bounds.getWidth()/3, 100.0f);
+    
     auto labelSpace = bounds.removeFromTop(100.0f);
     
     osc1.setBounds(0, labelSpace.getHeight(), bounds.getWidth()/2, bounds.getHeight()/4);
@@ -52,6 +59,7 @@ void WaveXAudioProcessorEditor::resized()
     adsr.setBounds(osc1.getWidth(), labelSpace.getHeight(), bounds.getWidth()/2, bounds.getHeight()/2);
     filter.setBounds(osc1.getWidth(), labelSpace.getHeight()+adsr.getHeight(), bounds.getWidth()/2, bounds.getHeight()/2);
     delay.setBounds(0, labelSpace.getHeight()+adsr.getHeight(), bounds.getWidth()/2, bounds.getHeight()/2);
+
 }
 
 

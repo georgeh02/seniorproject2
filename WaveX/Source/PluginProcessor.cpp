@@ -19,11 +19,14 @@ WaveXAudioProcessor::WaveXAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       ), apvts (*this, nullptr, "Parameters", createParams())
+                       ), apvts (*this, nullptr, "Parameters", createParams()), visualizer(1)
 #endif
 {
     synth.addSound(new SynthSound());
     synth.addVoice(new SynthVoice());
+    visualizer.setRepaintRate(30);
+    visualizer.setBufferSize(512);
+    //visualizer.updateParameters(30, 512);
 }
 
 WaveXAudioProcessor::~WaveXAudioProcessor()
@@ -149,9 +152,6 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
 
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
-
-//    auto bufferSize = buffer.getNumSamples();
-//    audo delayBufferSize = delayBuffer.getNumSamples();
     
     for(int i=0; i<synth.getNumVoices(); ++i)
     {
@@ -195,6 +195,8 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     
     delay.updateParameters(delayTime, feedback, delayMix, getSampleRate());
     delay.process(buffer);
+    //visualizer.process(buffer);
+    visualizer.pushBuffer(buffer);
 }
 
 //==============================================================================

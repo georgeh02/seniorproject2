@@ -14,6 +14,7 @@
 #include "UI/OscComponent.h"
 #include "UI/FilterComponent.h"
 #include "UI/DelayComponent.h"
+#include "UI/VisualizerComponent.h"
 
 //==============================================================================
 /**
@@ -35,6 +36,7 @@ private:
     AdsrComponent adsr;
     FilterComponent filter;
     DelayComponent delay;
+    //VisualizerComponent visualizer;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (WaveXAudioProcessorEditor)
 };

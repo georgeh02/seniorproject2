@@ -6,6 +6,10 @@
   <MAINGROUP id="PDci70" name="WaveX">
     <GROUP id="{E9D0970A-0789-7FCA-D45A-D1A5B54CDDB6}" name="Source">
       <GROUP id="{DABDCA76-7553-E206-A111-039000069968}" name="Data">
+        <FILE id="o5tzrM" name="VisualizerData.cpp" compile="1" resource="0"
+              file="Source/Data/VisualizerData.cpp"/>
+        <FILE id="gXsA3a" name="VisualizerData.h" compile="0" resource="0"
+              file="Source/Data/VisualizerData.h"/>
         <FILE id="MNbXAU" name="DelayData.cpp" compile="1" resource="0" file="Source/Data/DelayData.cpp"/>
         <FILE id="FFG7K8" name="DelayData.h" compile="0" resource="0" file="Source/Data/DelayData.h"/>
         <FILE id="sFmHSn" name="FilterData.cpp" compile="1" resource="0" file="Source/Data/FilterData.cpp"/>
@@ -30,6 +34,10 @@
         <FILE id="T3O8Ed" name="OscComponent.cpp" compile="1" resource="0"
               file="Source/UI/OscComponent.cpp"/>
         <FILE id="zsiMY8" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>
+        <FILE id="C2vSAb" name="VisualizerComponent.cpp" compile="1" resource="0"
+              file="Source/UI/VisualizerComponent.cpp"/>
+        <FILE id="foC6Lx" name="VisualizerComponent.h" compile="0" resource="0"
+              file="Source/UI/VisualizerComponent.h"/>
       </GROUP>
       <FILE id="RppbCW" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
