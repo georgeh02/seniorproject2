@@ -13,7 +13,7 @@
 void OscData::prepareToPlay(juce::dsp::ProcessSpec& spec)
 {
     prepare(spec);
-    oscGain.prepare(spec);
+    oscMix.prepare(spec);
 }
 
 void OscData::setWaveType(const int choice)
@@ -45,14 +45,17 @@ void OscData::setWaveFrequency(const int midiNoteNumber)
     setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber));
 }
 
-void OscData::setOscGain(float gain)
+void OscData::setOscMix(float mix)
 {
-    oscGain.setGainLinear(gain);
+    oscMix.setWetMixProportion(mix);
 }
+
 
 void OscData::getNextAudioBlock(juce::dsp::ProcessContextReplacing<float>& context)
 {
- 
+    const auto& input = context.getInputBlock();
+    const auto& output = context.getOutputBlock();
+    oscMix.pushDrySamples(input);
     process(context);
-    oscGain.process(context);
+    oscMix.mixWetSamples(output);
 }

@@ -52,11 +52,8 @@ void DelayData::process(juce::AudioBuffer<float>& buffer)
         for (size_t sample = 0; sample<input.getNumSamples(); ++sample)
         {
             auto input = samplesIn[sample] - lastDelayOutput[channel];
-            //auto input = samplesIn[sample];
             delay.pushSample((int)channel, input);
             samplesOut[sample] = delay.popSample((int)channel);
-
-            //lastDelayOutput[channel] = samplesOut[sample] * 0.99;
             lastDelayOutput[channel] = samplesOut[sample] * delayFeedbackVolume[channel].getNextValue();
         }
     }

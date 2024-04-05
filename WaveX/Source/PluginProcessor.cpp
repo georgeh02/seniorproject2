@@ -169,13 +169,13 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
             auto& osc1WaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
             auto& osc2WaveChoice = *apvts.getRawParameterValue("OSC2WAVETYPE");
             
-            auto& osc1Gain = *apvts.getRawParameterValue("OSC1GAIN");
-            auto& osc2Gain = *apvts.getRawParameterValue("OSC2GAIN");
+            auto& osc1Mix = *apvts.getRawParameterValue("OSC1MIX");
+            auto& osc2Mix = *apvts.getRawParameterValue("OSC2MIX");
             
             voice->getOscillator(0).setWaveType(osc1WaveChoice);
             voice->getOscillator(1).setWaveType(osc2WaveChoice);
-            voice->getOscillator(0).setOscGain(osc1Gain);
-            voice->getOscillator(1).setOscGain(osc2Gain);
+            voice->getOscillator(0).setOscMix(osc1Mix);
+            voice->getOscillator(1).setOscMix(osc2Mix);
             voice->update(attack.load(), decay.load(), sustain.load(), release.load());
         }
     }
@@ -245,9 +245,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveXAudioProcessor::createP
     
     params.push_back (std::make_unique<juce::AudioParameterChoice>(juce::ParameterID{"OSC2WAVETYPE", 1}, "Osc 1 Wave Type", juce::StringArray{"Sine", "Saw", "Square"}, 1));
     
-    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC1GAIN",  1 }, "Osc 1 Gain", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.5f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC1MIX",  1 }, "Osc 1 Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.5f));
     
-    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC2GAIN",  1 }, "Osc 2 Gain", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.5f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC2MIX",  1 }, "Osc 2 Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.5f));
     
     // FILTER
     params.push_back (std::make_unique<juce::AudioParameterChoice>(juce::ParameterID{"FILTERTYPE", 1}, "Filter Type", juce::StringArray{"Low Pass", "Band-Pass", "High-Pass"}, 0));
