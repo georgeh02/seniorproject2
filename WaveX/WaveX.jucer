@@ -19,6 +19,10 @@
         <FILE id="Kj93jW" name="AdsrComponent.cpp" compile="1" resource="0"
               file="Source/UI/AdsrComponent.cpp"/>
         <FILE id="eyGI1T" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/AdsrComponent.h"/>
+        <FILE id="OzeGa0" name="DelayComponent.cpp" compile="1" resource="0"
+              file="Source/UI/DelayComponent.cpp"/>
+        <FILE id="TkkZPa" name="DelayComponent.h" compile="0" resource="0"
+              file="Source/UI/DelayComponent.h"/>
         <FILE id="s0QLMq" name="FilterComponent.cpp" compile="1" resource="0"
               file="Source/UI/FilterComponent.cpp"/>
         <FILE id="HwGa1c" name="FilterComponent.h" compile="0" resource="0"

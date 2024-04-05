@@ -17,12 +17,14 @@ WaveXAudioProcessorEditor::WaveXAudioProcessorEditor (WaveXAudioProcessor& p)
 , osc2("Osc B", audioProcessor.apvts, "OSC2WAVETYPE", "OSC2GAIN")
 , adsr ("Amp Envelope", audioProcessor.apvts, "ATTACK", "DECAY", "SUSTAIN", "RELEASE")
 , filter(audioProcessor.apvts, "FILTERTYPE", "FILTERFREQ", "FILTERRES")
+, delay(audioProcessor.apvts, "DELAYTIME")
 {
     setSize (600, 600);
     addAndMakeVisible(osc1);
     addAndMakeVisible(osc2);
     addAndMakeVisible(adsr);
     addAndMakeVisible(filter);
+    addAndMakeVisible(delay);
 }
 
 WaveXAudioProcessorEditor::~WaveXAudioProcessorEditor()
@@ -49,6 +51,7 @@ void WaveXAudioProcessorEditor::resized()
     osc2.setBounds(0, labelSpace.getHeight()+osc1.getHeight(), bounds.getWidth()/2, bounds.getHeight()/4);
     adsr.setBounds(osc1.getWidth(), labelSpace.getHeight(), bounds.getWidth()/2, bounds.getHeight()/2);
     filter.setBounds(osc1.getWidth(), labelSpace.getHeight()+adsr.getHeight(), bounds.getWidth()/2, bounds.getHeight()/2);
+    delay.setBounds(0, labelSpace.getHeight()+adsr.getHeight(), bounds.getWidth()/2, bounds.getHeight()/2);
 }
 
 
