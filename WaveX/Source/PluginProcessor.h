@@ -13,6 +13,7 @@
 #include "SynthSound.h"
 #include "Data/FilterData.h"
 #include "Data/DelayData.h"
+#include "Data/ReverbData.h"
 #include "Data/VisualizerData.h"
 
 //==============================================================================
@@ -59,12 +60,13 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     
     juce::AudioProcessorValueTreeState apvts;
-    juce::AudioVisualiserComponent visualizer;
+    juce::AudioVisualiserComponent visualizer{1};
     
 private:
     juce::Synthesiser synth;
     FilterData filter;
     DelayData delay;
+    ReverbData reverb;
     //VisualizerData visualizer;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
     

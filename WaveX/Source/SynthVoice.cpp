@@ -75,8 +75,25 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int sta
     
 //    globalGain.process(context);
     
+    //GPT method
+//    for (int sample = 0; sample < numSamples; ++sample)
+//    {
+//        float osc1Sample = audioBlock.getChannelPointer(0)[sample];
+//        float osc2Sample = audioBlock.getChannelPointer(1)[sample];
+//
+//        // Mix the outputs of both oscillators (you can adjust the scaling factor as needed)
+//        float mixedSample = (osc1Sample + osc2Sample) * 0.5f;
+//
+//        // Write the mixed sample to the output buffer
+//        for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
+//        {
+//            outputBuffer.getWritePointer(channel)[startSample + sample] += mixedSample;
+//        }
+//    }
+    
     adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
     
     if (!adsr.isActive())
         clearCurrentNote();
+    
 }

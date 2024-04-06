@@ -19,11 +19,17 @@ WaveXAudioProcessor::WaveXAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       ), apvts (*this, nullptr, "Parameters", createParams()), visualizer(1)
+                       ), apvts (*this, nullptr, "Parameters", createParams())
 #endif
 {
     synth.addSound(new SynthSound());
-    synth.addVoice(new SynthVoice());
+    //synth.addVoice(new SynthVoice());
+    
+    for (int i = 0; i < 5; i++)
+    {
+        synth.addVoice(new SynthVoice());
+    }
+    
     visualizer.setRepaintRate(30);
     visualizer.setBufferSize(512);
     //visualizer.updateParameters(30, 512);
@@ -110,6 +116,7 @@ void WaveXAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     
     filter.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
     delay.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
+    reverb.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
 }
 
 void WaveXAudioProcessor::releaseResources()
@@ -188,13 +195,20 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
 
     filter.updateParameters(filterType, freq, resonance);
     filter.process(buffer);
-    
+
     auto& delayTime = *apvts.getRawParameterValue("DELAYTIME");
     auto& feedback = *apvts.getRawParameterValue("FEEDBACK");
     auto& delayMix = *apvts.getRawParameterValue("DELAYMIX");
-    
+
     delay.updateParameters(delayTime, feedback, delayMix, getSampleRate());
     delay.process(buffer);
+    
+    auto& roomSize = *apvts.getRawParameterValue("ROOMSIZE");
+    auto& reverbMix = *apvts.getRawParameterValue("DELAYMIX");
+
+    reverb.updateParameters(roomSize, reverbMix);
+    reverb.process(buffer);
+    
     //visualizer.process(buffer);
     visualizer.pushBuffer(buffer);
 }
@@ -260,6 +274,10 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveXAudioProcessor::createP
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "DELAYTIME",  1 }, "Delay Time", juce::NormalisableRange<float> { 0.0f, 1000.0f, 1.0f}, 500.0f));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "FEEDBACK",  1 }, "Feedback", juce::NormalisableRange<float> { -100.0f, 0.0f, 1.0f}, -100.0f));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "DELAYMIX",  1 }, "Delay Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.0f));
+    
+    // REVERB
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "ROOMSIZE",  1 }, "Room Size", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.1f}, 0.0f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "REVERBMIX",  1 }, "Reverb Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.0f));
     
     return { params.begin(), params.end() };
 }

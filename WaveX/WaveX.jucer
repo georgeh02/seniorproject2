@@ -6,6 +6,8 @@
   <MAINGROUP id="PDci70" name="WaveX">
     <GROUP id="{E9D0970A-0789-7FCA-D45A-D1A5B54CDDB6}" name="Source">
       <GROUP id="{DABDCA76-7553-E206-A111-039000069968}" name="Data">
+        <FILE id="zJzbnG" name="ReverbData.cpp" compile="1" resource="0" file="Source/Data/ReverbData.cpp"/>
+        <FILE id="DmcZdf" name="ReverbData.h" compile="0" resource="0" file="Source/Data/ReverbData.h"/>
         <FILE id="o5tzrM" name="VisualizerData.cpp" compile="1" resource="0"
               file="Source/Data/VisualizerData.cpp"/>
         <FILE id="gXsA3a" name="VisualizerData.h" compile="0" resource="0"
@@ -34,6 +36,10 @@
         <FILE id="T3O8Ed" name="OscComponent.cpp" compile="1" resource="0"
               file="Source/UI/OscComponent.cpp"/>
         <FILE id="zsiMY8" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>
+        <FILE id="z0ptMz" name="ReverbComponent.cpp" compile="1" resource="0"
+              file="Source/UI/ReverbComponent.cpp"/>
+        <FILE id="ciSyjq" name="ReverbComponent.h" compile="0" resource="0"
+              file="Source/UI/ReverbComponent.h"/>
         <FILE id="C2vSAb" name="VisualizerComponent.cpp" compile="1" resource="0"
               file="Source/UI/VisualizerComponent.cpp"/>
         <FILE id="foC6Lx" name="VisualizerComponent.h" compile="0" resource="0"
