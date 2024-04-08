@@ -29,25 +29,28 @@ void ReverbData::process(juce::AudioBuffer<float>& buffer)
 {
     jassert(isPrepared);
     
-    //auto block = juce::dsp::AudioBlock<float>(buffer).getSubsetChannelBlock(0, (size_t) numChannels);
+    //auto block = juce::dsp::AudioBlock<float>(buffer);
     juce::dsp::AudioBlock<float> block { buffer };
     auto context = juce::dsp::ProcessContextReplacing<float>(block);
 
-    const auto& input = context.getInputBlock();
-    const auto& output = context.getOutputBlock();
+    //const auto& input = buffer.getInputBlock();
+    //const auto& output = context.getOutputBlock();
 
-    mixer.pushDrySamples (input);
+    //mixer.pushDrySamples(block);
 
-    reverb.process (juce::dsp::ProcessContextReplacing<float> (block));
-    
-    mixer.mixWetSamples (output);
+    reverb.process(context);
+
+    //mixer.mixWetSamples(block);
 }
 
 void ReverbData::updateParameters(const float roomSize, const float reverbMix)
 {
     reverbParams.roomSize = roomSize;
+    reverbParams.wetLevel = reverbMix;
+    reverbParams.dryLevel = 1.0f - reverbMix;
+    //reverbParams.wetLevel = reverbMix;
     reverb.setParameters(reverbParams);
-    mixer.setWetMixProportion(reverbMix);
+    //mixer.setWetMixProportion(reverbMix);
 }
 
 void ReverbData::reset()

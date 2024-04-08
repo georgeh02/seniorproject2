@@ -23,12 +23,13 @@ WaveXAudioProcessor::WaveXAudioProcessor()
 #endif
 {
     synth.addSound(new SynthSound());
-    //synth.addVoice(new SynthVoice());
+    synth.addVoice(new SynthVoice());
     
-    for (int i = 0; i < 5; i++)
-    {
-        synth.addVoice(new SynthVoice());
-    }
+    //POLYPHONY
+//    for (int i = 0; i < 5; i++)
+//    {
+//        synth.addVoice(new SynthVoice());
+//    }
     
     visualizer.setRepaintRate(30);
     visualizer.setBufferSize(512);
@@ -160,6 +161,7 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     
+    
     for(int i=0; i<synth.getNumVoices(); ++i)
     {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
@@ -201,12 +203,14 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     auto& delayMix = *apvts.getRawParameterValue("DELAYMIX");
 
     delay.updateParameters(delayTime, feedback, delayMix, getSampleRate());
+    //juce::AudioBuffer<float> delayBuffer = buffer;
     delay.process(buffer);
     
     auto& roomSize = *apvts.getRawParameterValue("ROOMSIZE");
     auto& reverbMix = *apvts.getRawParameterValue("DELAYMIX");
 
     reverb.updateParameters(roomSize, reverbMix);
+    //juce::AudioBuffer<float> reverbBuffer = buffer;
     reverb.process(buffer);
     
     //visualizer.process(buffer);
