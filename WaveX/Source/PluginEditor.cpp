@@ -41,7 +41,7 @@ WaveXAudioProcessorEditor::~WaveXAudioProcessorEditor()
 //==============================================================================
 void WaveXAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    g.fillAll (juce::Colours::black);
+    g.fillAll (juce::Colours::white);
 }
 
 void WaveXAudioProcessorEditor::resized()

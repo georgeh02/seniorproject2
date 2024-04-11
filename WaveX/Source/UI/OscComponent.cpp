@@ -38,7 +38,7 @@ void OscComponent::paint (juce::Graphics& g)
     auto bounds = getLocalBounds().reduced(10);
     auto labelSpace = bounds.removeFromTop(25.0f);
     
-    g.setColour(juce::Colours::white);
+    g.setColour(juce::Colours::black);
     g.setFont(20.0f);
     g.drawText(componentName, labelSpace.withX(10), juce::Justification::left);
     g.drawRoundedRectangle(bounds.toFloat(), 5.0f, 3.0f);
@@ -64,11 +64,12 @@ void OscComponent::setSliderWithLabel(juce::Slider& slider, juce::Label& label, 
 {
     slider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     slider.setTextBoxStyle(juce::Slider::TextBoxRight, true, 50, 25);
+    slider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::black);
     addAndMakeVisible(slider);
     
     attachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, paramId, slider);
     
-    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
+    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::black);
     label.setFont(15.0f);
     label.setJustificationType(juce::Justification::centred);
     addAndMakeVisible(label);
