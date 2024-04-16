@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "GUIHelper.h"
 
 //==============================================================================
 /*
@@ -39,9 +40,8 @@ private:
     juce::Label filterTypeSelectorLabel{"Filter Type", "Filter Type"};
     juce::Label filterFreqLabel{"Filter Freq", "Filter Freq"};
     juce::Label filterResLabel{"Filter Res", "Filter Res"};
-
     
-    void setSliderWithLabel(juce::Slider& slider, juce::Label& label, juce::AudioProcessorValueTreeState& apvts, juce::String paramId, std::unique_ptr<Attachment>& attachment);
+    GUIHelper helper;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FilterComponent)
 };

@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "GUIHelper.h"
 
 //==============================================================================
 /*
@@ -39,7 +40,7 @@ private:
     juce::Label feedbackLabel{"Feedback", "Feedback"};
     juce::Label delayMixLabel{"Delay Mix", "Delay Mix"};
     
-    void setSliderWithLabel(juce::Slider& slider, juce::Label& label, juce::AudioProcessorValueTreeState& apvts, juce::String paramId, std::unique_ptr<Attachment>& attachment);
+    GUIHelper helper;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DelayComponent)
 };

@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "GUIHelper.h"
 
 //==============================================================================
 /*
@@ -36,7 +37,7 @@ private:
     juce::Label roomSizeLabel{"Room Size", "Room Size"};
     juce::Label reverbMixLabel{"Reverb Mix", "Reverb Mix"};
     
-    void setSliderWithLabel(juce::Slider& slider, juce::Label& label, juce::AudioProcessorValueTreeState& apvts, juce::String paramId, std::unique_ptr<Attachment>& attachment);
+    GUIHelper helper;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ReverbComponent)
 };

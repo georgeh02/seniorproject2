@@ -14,9 +14,10 @@
 //==============================================================================
 DelayComponent::DelayComponent(juce::AudioProcessorValueTreeState& apvts, juce::String delayTimeId, juce::String feedbackId, juce::String delayMixId)
 {
-    setSliderWithLabel(delayTime, delayTimeLabel, apvts, delayTimeId, delayTimeAttachment);
-    setSliderWithLabel(feedback, feedbackLabel, apvts, feedbackId, feedbackAttachment);
-    setSliderWithLabel(delayMix, delayMixLabel, apvts, delayMixId, delayMixAttachment);
+    GUIHelper helper;
+    helper.setSliderWithLabel(delayTime, delayTimeLabel, apvts, delayTimeId, delayTimeAttachment, *this);
+    helper.setSliderWithLabel(feedback, feedbackLabel, apvts, feedbackId, feedbackAttachment, *this);
+    helper.setSliderWithLabel(delayMix, delayMixLabel, apvts, delayMixId, delayMixAttachment, *this);
 }
 
 DelayComponent::~DelayComponent()
@@ -50,19 +51,4 @@ void DelayComponent::resized()
     
     delayMix.setBounds(feedbackLabel.getRight(), padding * 3, bounds.getWidth()/3, bounds.getHeight()/2);
     delayMixLabel.setBounds(delayMix.getX(), delayMix.getY()-padding, delayMix.getWidth(), boxHeight);
-}
-
-void DelayComponent::setSliderWithLabel(juce::Slider& slider, juce::Label& label, juce::AudioProcessorValueTreeState& apvts, juce::String paramId, std::unique_ptr<Attachment>& attachment)
-{
-    slider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
-    slider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::black);
-    addAndMakeVisible(slider);
-    
-    attachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, paramId, slider);
-    
-    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::black);
-    label.setFont(15.0f);
-    label.setJustificationType(juce::Justification::centred);
-    addAndMakeVisible(label);
 }

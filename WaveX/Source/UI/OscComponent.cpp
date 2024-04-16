@@ -17,17 +17,11 @@ OscComponent::OscComponent(juce::String name, juce::AudioProcessorValueTreeState
     componentName = name;
     
     juce::StringArray choices {"Sine", "Saw", "Square"};
-    oscWaveSelector.addItemList(choices, 1);
-    addAndMakeVisible(oscWaveSelector);
-    oscWaveSelectorAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, waveSelectorId, oscWaveSelector);
     
-    oscWaveSelectorLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
-    oscWaveSelectorLabel.setFont (15.0f);
-    oscWaveSelectorLabel.setJustificationType (juce::Justification::centred);
-    addAndMakeVisible (oscWaveSelectorLabel);
-    
-    setSliderWithLabel(oscGainSlider, oscGainLabel, apvts, gainSelectorId, oscGainAttachment);
+    helper.setComboBox(oscWaveSelector, oscWaveSelectorLabel, choices, apvts, waveSelectorId, oscWaveSelectorAttachment, *this);
+    helper.setSliderWithLabel(oscGainSlider, oscGainLabel, apvts, gainSelectorId, oscGainAttachment, *this);
 }
+
 
 OscComponent::~OscComponent()
 {
@@ -58,19 +52,4 @@ void OscComponent::resized()
     
     oscGainSlider.setBounds (oscWaveSelector.getRight(), padding * 2, bounds.getWidth()/2, bounds.getHeight() - (padding/2));
     oscGainLabel.setBounds (oscGainSlider.getX(), padding * 1.5, bounds.getWidth()/2, boxHeight);
-}
-
-void OscComponent::setSliderWithLabel(juce::Slider& slider, juce::Label& label, juce::AudioProcessorValueTreeState& apvts, juce::String paramId, std::unique_ptr<Attachment>& attachment)
-{
-    slider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    slider.setTextBoxStyle(juce::Slider::TextBoxRight, true, 50, 25);
-    slider.setColour(juce::Slider::textBoxTextColourId, juce::Colours::black);
-    addAndMakeVisible(slider);
-    
-    attachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, paramId, slider);
-    
-    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::black);
-    label.setFont(15.0f);
-    label.setJustificationType(juce::Justification::centred);
-    addAndMakeVisible(label);
 }

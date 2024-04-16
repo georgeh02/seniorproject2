@@ -33,6 +33,8 @@
               file="Source/UI/FilterComponent.cpp"/>
         <FILE id="HwGa1c" name="FilterComponent.h" compile="0" resource="0"
               file="Source/UI/FilterComponent.h"/>
+        <FILE id="Tt4pbn" name="GUIHelper.cpp" compile="1" resource="0" file="Source/UI/GUIHelper.cpp"/>
+        <FILE id="B6KFGO" name="GUIHelper.h" compile="0" resource="0" file="Source/UI/GUIHelper.h"/>
         <FILE id="T3O8Ed" name="OscComponent.cpp" compile="1" resource="0"
               file="Source/UI/OscComponent.cpp"/>
         <FILE id="zsiMY8" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>
