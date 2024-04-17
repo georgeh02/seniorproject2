@@ -30,6 +30,8 @@
       <FILE id="spuzBu" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
     </GROUP>
     <GROUP id="{8704CDFA-895D-1C76-2DFE-823F507E8A93}" name="Resources">
+      <FILE id="J3gOBS" name="Logo1.png" compile="0" resource="1" file="Resources/Logo1.png"/>
+      <FILE id="ikr22n" name="Logo3.png" compile="0" resource="1" file="Resources/Logo3.png"/>
       <FILE id="A89XqA" name="magic.xml" compile="0" resource="1" file="Resources/magic.xml"/>
     </GROUP>
   </MAINGROUP>
@@ -51,7 +53,8 @@
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
   </MODULES>
-  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"
+               FOLEYS_ENABLE_BINARY_DATA="1"/>
   <EXPORTFORMATS>
     <VS2019 targetFolder="Builds/VisualStudio2019">
       <CONFIGURATIONS>
