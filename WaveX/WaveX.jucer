@@ -21,42 +21,16 @@
         <FILE id="n7MzlU" name="AdsrData.h" compile="0" resource="0" file="Source/Data/AdsrData.h"/>
         <FILE id="kKCXcS" name="AdsrData.cpp" compile="1" resource="0" file="Source/Data/AdsrData.cpp"/>
       </GROUP>
-      <GROUP id="{022B60FC-0BD9-3741-AC6B-7EC9E16FF1BE}" name="UI">
-        <FILE id="Kj93jW" name="AdsrComponent.cpp" compile="1" resource="0"
-              file="Source/UI/AdsrComponent.cpp"/>
-        <FILE id="eyGI1T" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/AdsrComponent.h"/>
-        <FILE id="OzeGa0" name="DelayComponent.cpp" compile="1" resource="0"
-              file="Source/UI/DelayComponent.cpp"/>
-        <FILE id="TkkZPa" name="DelayComponent.h" compile="0" resource="0"
-              file="Source/UI/DelayComponent.h"/>
-        <FILE id="s0QLMq" name="FilterComponent.cpp" compile="1" resource="0"
-              file="Source/UI/FilterComponent.cpp"/>
-        <FILE id="HwGa1c" name="FilterComponent.h" compile="0" resource="0"
-              file="Source/UI/FilterComponent.h"/>
-        <FILE id="Tt4pbn" name="GUIHelper.cpp" compile="1" resource="0" file="Source/UI/GUIHelper.cpp"/>
-        <FILE id="B6KFGO" name="GUIHelper.h" compile="0" resource="0" file="Source/UI/GUIHelper.h"/>
-        <FILE id="T3O8Ed" name="OscComponent.cpp" compile="1" resource="0"
-              file="Source/UI/OscComponent.cpp"/>
-        <FILE id="zsiMY8" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>
-        <FILE id="z0ptMz" name="ReverbComponent.cpp" compile="1" resource="0"
-              file="Source/UI/ReverbComponent.cpp"/>
-        <FILE id="ciSyjq" name="ReverbComponent.h" compile="0" resource="0"
-              file="Source/UI/ReverbComponent.h"/>
-        <FILE id="C2vSAb" name="VisualizerComponent.cpp" compile="1" resource="0"
-              file="Source/UI/VisualizerComponent.cpp"/>
-        <FILE id="foC6Lx" name="VisualizerComponent.h" compile="0" resource="0"
-              file="Source/UI/VisualizerComponent.h"/>
-      </GROUP>
       <FILE id="RppbCW" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="gEjHFY" name="PluginProcessor.h" compile="0" resource="0"
             file="Source/PluginProcessor.h"/>
-      <FILE id="EnJ83C" name="PluginEditor.cpp" compile="1" resource="0"
-            file="Source/PluginEditor.cpp"/>
-      <FILE id="xnYKVK" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
       <FILE id="SKRzvZ" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <FILE id="YMR07W" name="SynthVoice.cpp" compile="1" resource="0" file="Source/SynthVoice.cpp"/>
       <FILE id="spuzBu" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
+    </GROUP>
+    <GROUP id="{8704CDFA-895D-1C76-2DFE-823F507E8A93}" name="Resources">
+      <FILE id="A89XqA" name="magic.xml" compile="0" resource="1" file="Resources/magic.xml"/>
     </GROUP>
   </MAINGROUP>
   <MODULES>

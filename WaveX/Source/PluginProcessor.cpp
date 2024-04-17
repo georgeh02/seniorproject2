@@ -7,12 +7,11 @@
 */
 
 #include "PluginProcessor.h"
-#include "PluginEditor.h"
 
 //==============================================================================
 WaveXAudioProcessor::WaveXAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
-     : AudioProcessor (BusesProperties()
+     : foleys::MagicProcessor (juce::AudioProcessor::BusesProperties()
                      #if ! JucePlugin_IsMidiEffect
                       #if ! JucePlugin_IsSynth
                        .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
@@ -22,6 +21,20 @@ WaveXAudioProcessor::WaveXAudioProcessor()
                        ), apvts (*this, nullptr, "Parameters", createParams())
 #endif
 {
+    FOLEYS_SET_SOURCE_PATH (__FILE__);
+
+    auto file = juce::File::getSpecialLocation (juce::File::currentApplicationFile)
+        .getChildFile ("Contents")
+        .getChildFile ("Resources")
+        .getChildFile ("magic.xml");
+
+    if (file.existsAsFile())
+        magicState.setGuiValueTree (file);
+    else
+        magicState.setGuiValueTree (BinaryData::magic_xml, BinaryData::magic_xmlSize);
+    
+    oscilloscope = magicState.createAndAddObject<foleys::MagicOscilloscope>("waveform");
+    
     synth.addSound(new SynthSound());
     synth.addVoice(new SynthVoice());
     
@@ -30,10 +43,6 @@ WaveXAudioProcessor::WaveXAudioProcessor()
 //    {
 //        synth.addVoice(new SynthVoice());
 //    }
-    
-    visualizer.setRepaintRate(30);
-    visualizer.setBufferSize(512);
-    //visualizer.updateParameters(30, 512);
 }
 
 WaveXAudioProcessor::~WaveXAudioProcessor()
@@ -118,6 +127,8 @@ void WaveXAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     filter.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
     delay.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
     reverb.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
+    
+    oscilloscope->prepareToPlay(sampleRate, samplesPerBlock);
 }
 
 void WaveXAudioProcessor::releaseResources()
@@ -158,6 +169,8 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
 
+    magicState.processMidiBuffer (midiMessages, buffer.getNumSamples(), true);
+    
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     
@@ -213,20 +226,19 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     //juce::AudioBuffer<float> reverbBuffer = buffer;
     reverb.process(buffer);
     
-    //visualizer.process(buffer);
-    visualizer.pushBuffer(buffer);
+    oscilloscope->pushSamples (buffer);
 }
 
 //==============================================================================
-bool WaveXAudioProcessor::hasEditor() const
-{
-    return true; // (change this to false if you choose to not supply an editor)
-}
-
-juce::AudioProcessorEditor* WaveXAudioProcessor::createEditor()
-{
-    return new WaveXAudioProcessorEditor (*this);
-}
+//bool WaveXAudioProcessor::hasEditor() const
+//{
+//    return true; // (change this to false if you choose to not supply an editor)
+//}
+//
+//juce::AudioProcessorEditor* WaveXAudioProcessor::createEditor()
+//{
+//    return new foleys::MagicPluginEditor(magicState);
+//}
 
 //==============================================================================
 void WaveXAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
@@ -265,9 +277,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveXAudioProcessor::createP
     
     params.push_back (std::make_unique<juce::AudioParameterChoice>(juce::ParameterID{"OSC2WAVETYPE", 1}, "Osc 1 Wave Type", juce::StringArray{"Sine", "Saw", "Square"}, 1));
     
-    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC1MIX",  1 }, "Osc 1 Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.5f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC1MIX",  1 }, "Osc 1 Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.25f));
     
-    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC2MIX",  1 }, "Osc 2 Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.5f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC2MIX",  1 }, "Osc 2 Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.25f));
     
     // FILTER
     params.push_back (std::make_unique<juce::AudioParameterChoice>(juce::ParameterID{"FILTERTYPE", 1}, "Filter Type", juce::StringArray{"Low Pass", "Band-Pass", "High-Pass"}, 0));
