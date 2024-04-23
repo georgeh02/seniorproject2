@@ -23,10 +23,9 @@ void DelayData::prepareToPlay(double sampleRate, int samplesPerBlock, int numCha
     mixer.prepare(spec);
     
     for (auto& volume : delayFeedbackVolume)
-        volume.reset (spec.sampleRate, 0.05);
+        volume.reset(spec.sampleRate, 0.05);
     
     std::fill(lastDelayOutput.begin(), lastDelayOutput.end(), 0.0f);
-    //std::fill(delayValue.begin(), delayValue.end(), 999);
     isPrepared = true;
 }
 
@@ -66,12 +65,12 @@ void DelayData::updateParameters(const float delayTime, const float feedback, co
 {
     delay.setDelay(delayTime / 1000.0f * sampleRate);
     
-    const auto feedbackGain = juce::Decibels::decibelsToGain(feedback, -100.0f);
+    const auto feedbackGain = juce::Decibels::decibelsToGain(feedback, -50.0f);
     
-    mixer.setWetMixProportion(delayMix);
+    mixer.setWetMixProportion(delayMix * 0.5f);
     
     for (auto& volume : delayFeedbackVolume)
-        volume.setTargetValue (feedbackGain);
+        volume.setTargetValue(feedbackGain);
     
     
 }

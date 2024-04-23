@@ -6,12 +6,10 @@
   <MAINGROUP id="PDci70" name="WaveX">
     <GROUP id="{E9D0970A-0789-7FCA-D45A-D1A5B54CDDB6}" name="Source">
       <GROUP id="{DABDCA76-7553-E206-A111-039000069968}" name="Data">
+        <FILE id="vkUMMg" name="LimiterData.cpp" compile="1" resource="0" file="Source/Data/LimiterData.cpp"/>
+        <FILE id="bFuCDK" name="LimiterData.h" compile="0" resource="0" file="Source/Data/LimiterData.h"/>
         <FILE id="zJzbnG" name="ReverbData.cpp" compile="1" resource="0" file="Source/Data/ReverbData.cpp"/>
         <FILE id="DmcZdf" name="ReverbData.h" compile="0" resource="0" file="Source/Data/ReverbData.h"/>
-        <FILE id="o5tzrM" name="VisualizerData.cpp" compile="1" resource="0"
-              file="Source/Data/VisualizerData.cpp"/>
-        <FILE id="gXsA3a" name="VisualizerData.h" compile="0" resource="0"
-              file="Source/Data/VisualizerData.h"/>
         <FILE id="MNbXAU" name="DelayData.cpp" compile="1" resource="0" file="Source/Data/DelayData.cpp"/>
         <FILE id="FFG7K8" name="DelayData.h" compile="0" resource="0" file="Source/Data/DelayData.h"/>
         <FILE id="sFmHSn" name="FilterData.cpp" compile="1" resource="0" file="Source/Data/FilterData.cpp"/>
@@ -54,7 +52,7 @@
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
   </MODULES>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"
-               FOLEYS_ENABLE_BINARY_DATA="1"/>
+               FOLEYS_ENABLE_BINARY_DATA="1" FOLEYS_SHOW_GUI_EDITOR_PALLETTE="0"/>
   <EXPORTFORMATS>
     <VS2019 targetFolder="Builds/VisualStudio2019">
       <CONFIGURATIONS>

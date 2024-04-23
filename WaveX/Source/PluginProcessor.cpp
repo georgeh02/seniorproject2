@@ -127,14 +127,13 @@ void WaveXAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     filter.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
     delay.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
     reverb.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
-    
+    limiter.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
     oscilloscope->prepareToPlay(sampleRate, samplesPerBlock);
 }
 
 void WaveXAudioProcessor::releaseResources()
 {
-    // When playback stops, you can use this as an opportunity to free up any
-    // spare memory, etc.
+
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -179,10 +178,6 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
         {
-            // Osc controls
-            // ADSR
-            // LFO
-            
             auto& attack = *apvts.getRawParameterValue("ATTACK");
             auto& decay = *apvts.getRawParameterValue("DECAY");
             auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
@@ -216,46 +211,32 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     auto& delayMix = *apvts.getRawParameterValue("DELAYMIX");
 
     delay.updateParameters(delayTime, feedback, delayMix, getSampleRate());
-    //juce::AudioBuffer<float> delayBuffer = buffer;
     delay.process(buffer);
     
     auto& roomSize = *apvts.getRawParameterValue("ROOMSIZE");
-    auto& reverbMix = *apvts.getRawParameterValue("DELAYMIX");
+    auto& reverbMix = *apvts.getRawParameterValue("REVERBMIX");
 
     reverb.updateParameters(roomSize, reverbMix);
-    //juce::AudioBuffer<float> reverbBuffer = buffer;
     reverb.process(buffer);
+    
+    limiter.updateParameters(0.0f, 0.0f);
+    limiter.process(buffer);
     
     oscilloscope->pushSamples (buffer);
 }
 
 //==============================================================================
-//bool WaveXAudioProcessor::hasEditor() const
-//{
-//    return true; // (change this to false if you choose to not supply an editor)
-//}
-//
-//juce::AudioProcessorEditor* WaveXAudioProcessor::createEditor()
-//{
-//    return new foleys::MagicPluginEditor(magicState);
-//}
-
-//==============================================================================
 void WaveXAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
+
 }
 
 void WaveXAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
+
 }
 
 //==============================================================================
-// This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new WaveXAudioProcessor();
@@ -277,9 +258,9 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveXAudioProcessor::createP
     
     params.push_back (std::make_unique<juce::AudioParameterChoice>(juce::ParameterID{"OSC2WAVETYPE", 1}, "Osc 1 Wave Type", juce::StringArray{"Sine", "Saw", "Square"}, 1));
     
-    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC1MIX",  1 }, "Osc 1 Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.25f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC1MIX",  1 }, "Osc 1 Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.5f));
     
-    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC2MIX",  1 }, "Osc 2 Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.25f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "OSC2MIX",  1 }, "Osc 2 Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.5f));
     
     // FILTER
     params.push_back (std::make_unique<juce::AudioParameterChoice>(juce::ParameterID{"FILTERTYPE", 1}, "Filter Type", juce::StringArray{"Low Pass", "Band-Pass", "High-Pass"}, 0));
@@ -288,7 +269,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveXAudioProcessor::createP
     
     // DELAY
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "DELAYTIME",  1 }, "Delay Time", juce::NormalisableRange<float> { 0.0f, 1000.0f, 1.0f}, 500.0f));
-    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "FEEDBACK",  1 }, "Feedback", juce::NormalisableRange<float> { -100.0f, 0.0f, 1.0f}, -100.0f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "FEEDBACK",  1 }, "Feedback", juce::NormalisableRange<float> { -50.0, 0.0f, 1.0f}, -50.0f));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "DELAYMIX",  1 }, "Delay Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.0f));
     
     // REVERB

@@ -22,7 +22,6 @@ public:
 private:
     juce::dsp::Reverb reverb;
     juce::dsp::Reverb::Parameters reverbParams;
-    juce::dsp::DryWetMixer<float> mixer;
     
     bool isPrepared{false};
 };

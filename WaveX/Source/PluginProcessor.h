@@ -14,6 +14,7 @@
 #include "Data/FilterData.h"
 #include "Data/DelayData.h"
 #include "Data/ReverbData.h"
+#include "Data/LimiterData.h"
 
 //==============================================================================
 /**
@@ -34,10 +35,6 @@ public:
    #endif
 
     void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
-
-    //==============================================================================
-//    juce::AudioProcessorEditor* createEditor() override;
-//    bool hasEditor() const override;
 
     //==============================================================================
     const juce::String getName() const override;
@@ -66,7 +63,9 @@ private:
     FilterData filter;
     DelayData delay;
     ReverbData reverb;
+    LimiterData limiter;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
+    static constexpr int numVoices { 5 };
     foleys::MagicPlotSource* oscilloscope = nullptr;
     
     //==============================================================================

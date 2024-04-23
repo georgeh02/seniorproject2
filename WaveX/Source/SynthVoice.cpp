@@ -48,8 +48,8 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     
     oscillators[0].prepareToPlay(spec);
     oscillators[1].prepareToPlay(spec);
-//    globalGain.prepare(spec);
-//    globalGain.setGainLinear(0.03f);
+    globalGain.prepare(spec);
+    globalGain.setGainLinear(0.5f);
     
     isPrepared = true;
 }
@@ -65,31 +65,12 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int sta
     
     if (!isVoiceActive()) return;
     
-    // Separate context for each osc ??
     auto audioBlock = juce::dsp::AudioBlock<float>(outputBuffer).getSubBlock(startSample, numSamples);
-    juce::dsp::ProcessContextReplacing<float> context1(audioBlock);
-    juce::dsp::ProcessContextReplacing<float> context2(audioBlock);
+    juce::dsp::ProcessContextReplacing<float> context(audioBlock);
     
-    oscillators[0].getNextAudioBlock(context1);
-    oscillators[1].getNextAudioBlock(context1);
-    
-//    globalGain.process(context);
-    
-    //GPT method
-//    for (int sample = 0; sample < numSamples; ++sample)
-//    {
-//        float osc1Sample = audioBlock.getChannelPointer(0)[sample];
-//        float osc2Sample = audioBlock.getChannelPointer(1)[sample];
-//
-//        // Mix the outputs of both oscillators (you can adjust the scaling factor as needed)
-//        float mixedSample = (osc1Sample + osc2Sample) * 0.5f;
-//
-//        // Write the mixed sample to the output buffer
-//        for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
-//        {
-//            outputBuffer.getWritePointer(channel)[startSample + sample] += mixedSample;
-//        }
-//    }
+    oscillators[0].getNextAudioBlock(context);
+    oscillators[1].getNextAudioBlock(context);
+    globalGain.process(context);
     
     adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples);
     

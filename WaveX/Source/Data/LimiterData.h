@@ -1,8 +1,8 @@
 /*
   ==============================================================================
 
-    VisualizerData.h
-    Created: 5 Apr 2024 4:02:43pm
+    LimiterData.h
+    Created: 23 Apr 2024 3:30:18pm
     Author:  George Harrison
 
   ==============================================================================
@@ -11,15 +11,15 @@
 #pragma once
 #include <JuceHeader.h>
 
-class VisualizerData
+class LimiterData
 {
 public:
-//    void prepareToPlay(double sampleRate, int samplesPerBlock, int numChannels);
+    void prepareToPlay(double sampleRate, int samplesPerBlock, int numChannels);
     void process(juce::AudioBuffer<float>& buffer);
-    void updateParameters(const int repaintRate, const int bufferSize);
-//    void reset();
+    void updateParameters(const float threshold, const float release);
+    void reset();
     
 private:
-    juce::AudioVisualiserComponent visualizer{1};
+    juce::dsp::Limiter<float> limiter;
     bool isPrepared{false};
 };

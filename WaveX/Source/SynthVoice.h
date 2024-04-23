@@ -30,10 +30,11 @@ public:
     OscData& getOscillator(int index){ return oscillators[index]; };
     
 private:
+//    static constexpr int numChannelsToProcess { 2 }; //new line
     AdsrData adsr;
 
     std::array<OscData, 2> oscillators;
-    //juce::dsp::Gain<float> globalGain;
+    juce::dsp::Gain<float> globalGain;
     bool isPrepared {false};
     
 

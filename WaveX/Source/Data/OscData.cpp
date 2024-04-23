@@ -47,7 +47,7 @@ void OscData::setWaveFrequency(const int midiNoteNumber)
 
 void OscData::setOscMix(float mix)
 {
-    oscMix.setWetMixProportion(mix);
+    oscMix.setWetMixProportion(mix * 0.5f);
 }
 
 
