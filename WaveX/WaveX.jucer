@@ -6,6 +6,7 @@
   <MAINGROUP id="PDci70" name="WaveX">
     <GROUP id="{E9D0970A-0789-7FCA-D45A-D1A5B54CDDB6}" name="Source">
       <GROUP id="{DABDCA76-7553-E206-A111-039000069968}" name="Data">
+        <FILE id="rfpSYk" name="ComponentBase.h" compile="0" resource="0" file="Source/Data/ComponentBase.h"/>
         <FILE id="vkUMMg" name="LimiterData.cpp" compile="1" resource="0" file="Source/Data/LimiterData.cpp"/>
         <FILE id="bFuCDK" name="LimiterData.h" compile="0" resource="0" file="Source/Data/LimiterData.h"/>
         <FILE id="zJzbnG" name="ReverbData.cpp" compile="1" resource="0" file="Source/Data/ReverbData.cpp"/>

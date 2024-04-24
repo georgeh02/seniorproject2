@@ -1,21 +1,19 @@
 /*
   ==============================================================================
 
-    AdsrData.h
-    Created: 18 Mar 2024 10:15:42pm
+    ComponentBase.h
+    Created: 23 Apr 2024 5:47:24pm
     Author:  George Harrison
 
   ==============================================================================
 */
 
 #pragma once
-
 #include <JuceHeader.h>
 
-class AdsrData : public juce::ADSR
+class ComponentBase
 {
 public:
-    void updateADSR(const float attack, const float decay, const float sustain, const float release);
-private:
-    juce::ADSR::Parameters adsrParams;
+    virtual ~ComponentBase() {};
+    virtual void updateParameters(const juce::NamedValueSet& paramValues) = 0;
 };

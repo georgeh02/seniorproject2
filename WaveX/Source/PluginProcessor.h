@@ -56,16 +56,17 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     
     juce::AudioProcessorValueTreeState apvts;
-    juce::AudioVisualiserComponent visualizer{1};
-    
+    void updateParameters(ComponentBase& component, const std::vector<std::string>& params);
+    void updateVoiceParameters(SynthVoice* voice, const std::vector<std::string>& params);
+
 private:
+    const int numVoices{1}; //control polyphony
     juce::Synthesiser synth;
     FilterData filter;
     DelayData delay;
     ReverbData reverb;
     LimiterData limiter;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
-    static constexpr int numVoices { 5 };
     foleys::MagicPlotSource* oscilloscope = nullptr;
     
     //==============================================================================

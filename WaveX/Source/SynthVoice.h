@@ -25,17 +25,11 @@ public:
     void pitchWheelMoved (int newPitchWheelValue) override;
     void prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels);
     void renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int StartSample, int numSamples) override;
-    
-    void update(const float attack, const float decay, const float sustain, const float release);
-    OscData& getOscillator(int index){ return oscillators[index]; };
+    void update(const juce::NamedValueSet& paramValues);
     
 private:
-//    static constexpr int numChannelsToProcess { 2 }; //new line
     AdsrData adsr;
-
     std::array<OscData, 2> oscillators;
     juce::dsp::Gain<float> globalGain;
     bool isPrepared {false};
-    
-
 };

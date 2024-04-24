@@ -10,18 +10,18 @@
 
 #pragma once
 #include <JuceHeader.h>
+#include "ComponentBase.h"
 
-class ReverbData
+class ReverbData : public ComponentBase
 {
 public:
     void prepareToPlay(double sampleRate, int samplesPerBlock, int numChannels);
     void process(juce::AudioBuffer<float>& buffer);
-    void updateParameters(const float roomSize, const float reverbMix);
+    void updateParameters(const juce::NamedValueSet& paramValues) override;
     void reset();
     
 private:
     juce::dsp::Reverb reverb;
     juce::dsp::Reverb::Parameters reverbParams;
-    
     bool isPrepared{false};
 };

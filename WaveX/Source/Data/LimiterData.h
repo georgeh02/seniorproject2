@@ -10,15 +10,15 @@
 
 #pragma once
 #include <JuceHeader.h>
+#include "ComponentBase.h"
 
-class LimiterData
+class LimiterData : public ComponentBase
 {
 public:
     void prepareToPlay(double sampleRate, int samplesPerBlock, int numChannels);
     void process(juce::AudioBuffer<float>& buffer);
-    void updateParameters(const float threshold, const float release);
+    void updateParameters(const juce::NamedValueSet& paramValues) override;
     void reset();
-    
 private:
     juce::dsp::Limiter<float> limiter;
     bool isPrepared{false};

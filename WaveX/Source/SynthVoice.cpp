@@ -54,9 +54,14 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     isPrepared = true;
 }
 
-void SynthVoice::update(const float attack, const float decay, const float sustain, const float release)
+void SynthVoice::update(const juce::NamedValueSet& paramValues)
 {
-    adsr.updateADSR(attack, decay, sustain, release);
+    adsr.updateADSR(static_cast<float>(paramValues["ATTACK"]), static_cast<float>(paramValues["DECAY"]), static_cast<float>(paramValues["SUSTAIN"]), static_cast<float>(paramValues["RELEASE"]));
+    
+    oscillators[0].setWaveType(static_cast<int>(paramValues["OSC1WAVETYPE"]));
+    oscillators[1].setWaveType(static_cast<int>(paramValues["OSC2WAVETYPE"]));
+    oscillators[0].setOscMix(static_cast<float>(paramValues["OSC1MIX"]));
+    oscillators[1].setOscMix(static_cast<float>(paramValues["OSC2MIX"]));
 }
 
 void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples)
@@ -76,5 +81,4 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int sta
     
     if (!adsr.isActive())
         clearCurrentNote();
-    
 }

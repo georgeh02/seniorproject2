@@ -21,28 +21,15 @@ WaveXAudioProcessor::WaveXAudioProcessor()
                        ), apvts (*this, nullptr, "Parameters", createParams())
 #endif
 {
-    FOLEYS_SET_SOURCE_PATH (__FILE__);
 
-    auto file = juce::File::getSpecialLocation (juce::File::currentApplicationFile)
-        .getChildFile ("Contents")
-        .getChildFile ("Resources")
-        .getChildFile ("magic.xml");
-
-    if (file.existsAsFile())
-        magicState.setGuiValueTree (file);
-    else
-        magicState.setGuiValueTree (BinaryData::magic_xml, BinaryData::magic_xmlSize);
-    
+    magicState.setGuiValueTree(BinaryData::magic_xml, BinaryData::magic_xmlSize); //setting GUI
     oscilloscope = magicState.createAndAddObject<foleys::MagicOscilloscope>("waveform");
-    
     synth.addSound(new SynthSound());
-    synth.addVoice(new SynthVoice());
-    
-    //POLYPHONY
-//    for (int i = 0; i < 5; i++)
-//    {
-//        synth.addVoice(new SynthVoice());
-//    }
+
+    for (int i = 0; i < numVoices; i++)
+    {
+        synth.addVoice(new SynthVoice());
+    }
 }
 
 WaveXAudioProcessor::~WaveXAudioProcessor()
@@ -123,7 +110,7 @@ void WaveXAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
             voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
         }
     }
-    
+
     filter.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
     delay.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
     reverb.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
@@ -173,53 +160,26 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     
-    
     for(int i=0; i<synth.getNumVoices(); ++i)
     {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
         {
-            auto& attack = *apvts.getRawParameterValue("ATTACK");
-            auto& decay = *apvts.getRawParameterValue("DECAY");
-            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
-            auto& release = *apvts.getRawParameterValue("RELEASE");
-            
-            auto& osc1WaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
-            auto& osc2WaveChoice = *apvts.getRawParameterValue("OSC2WAVETYPE");
-            
-            auto& osc1Mix = *apvts.getRawParameterValue("OSC1MIX");
-            auto& osc2Mix = *apvts.getRawParameterValue("OSC2MIX");
-            
-            voice->getOscillator(0).setWaveType(osc1WaveChoice);
-            voice->getOscillator(1).setWaveType(osc2WaveChoice);
-            voice->getOscillator(0).setOscMix(osc1Mix);
-            voice->getOscillator(1).setOscMix(osc2Mix);
-            voice->update(attack.load(), decay.load(), sustain.load(), release.load());
+            updateVoiceParameters(voice, {"ATTACK", "DECAY", "SUSTAIN", "RELEASE", "OSC1WAVETYPE", "OSC2WAVETYPE", "OSC1MIX", "OSC2MIX"});
         }
     }
     
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
     
-    auto& filterType = *apvts.getRawParameterValue("FILTERTYPE");
-    auto& freq = *apvts.getRawParameterValue("FILTERFREQ");
-    auto& resonance = *apvts.getRawParameterValue("FILTERRES");
-
-    filter.updateParameters(filterType, freq, resonance);
+    updateParameters(filter, {"FILTERTYPE", "FILTERFREQ", "FILTERRES"});
     filter.process(buffer);
 
-    auto& delayTime = *apvts.getRawParameterValue("DELAYTIME");
-    auto& feedback = *apvts.getRawParameterValue("FEEDBACK");
-    auto& delayMix = *apvts.getRawParameterValue("DELAYMIX");
-
-    delay.updateParameters(delayTime, feedback, delayMix, getSampleRate());
+    updateParameters(delay, {"DELAYTIME", "FEEDBACK", "DELAYMIX"});
     delay.process(buffer);
-    
-    auto& roomSize = *apvts.getRawParameterValue("ROOMSIZE");
-    auto& reverbMix = *apvts.getRawParameterValue("REVERBMIX");
-
-    reverb.updateParameters(roomSize, reverbMix);
+        
+    updateParameters(reverb, {"ROOMSIZE", "REVERBMIX"});
     reverb.process(buffer);
     
-    limiter.updateParameters(0.0f, 0.0f);
+    limiter.updateParameters({{"THRESHOLD", 0.0f}, {"RELEASE", 0.0f}}); //safety limiter ensures volume isn't too loud
     limiter.process(buffer);
     
     oscilloscope->pushSamples (buffer);
@@ -277,4 +237,30 @@ juce::AudioProcessorValueTreeState::ParameterLayout WaveXAudioProcessor::createP
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{ "REVERBMIX",  1 }, "Reverb Mix", juce::NormalisableRange<float> { 0.0f, 1.0f, 0.01f}, 0.0f));
     
     return { params.begin(), params.end() };
+}
+
+void WaveXAudioProcessor::updateParameters(ComponentBase& component, const std::vector<std::string>& params)
+{
+    juce::NamedValueSet paramValues;
+    
+    for (const std::string& param : params)
+        {
+            auto& paramValue = *apvts.getRawParameterValue(param);
+            paramValues.set(juce::Identifier(param), juce::var(paramValue));
+        }
+    
+    component.updateParameters(paramValues);
+}
+
+void WaveXAudioProcessor::updateVoiceParameters(SynthVoice* voice, const std::vector<std::string>& params)
+{
+    juce::NamedValueSet paramValues;
+    
+    for (const std::string& param : params)
+        {
+            auto& paramValue = *apvts.getRawParameterValue(param);
+            paramValues.set(juce::Identifier(param), juce::var(paramValue.load()));
+        }
+    
+    voice->update(paramValues);
 }

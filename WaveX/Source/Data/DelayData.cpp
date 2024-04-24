@@ -12,20 +12,21 @@
 
 void DelayData::prepareToPlay(double sampleRate, int samplesPerBlock, int numChannels)
 {
-    delay.reset();
-    
     juce::dsp::ProcessSpec spec;
     spec.maximumBlockSize = samplesPerBlock;
     spec.sampleRate = sampleRate;
+    this->sampleRate = sampleRate;
     spec.numChannels = numChannels;
     
+    delay.reset();
     delay.prepare(spec);
     mixer.prepare(spec);
-    
-    for (auto& volume : delayFeedbackVolume)
+        
+    for (auto& volume:delayFeedbackVolume)
         volume.reset(spec.sampleRate, 0.05);
     
-    std::fill(lastDelayOutput.begin(), lastDelayOutput.end(), 0.0f);
+    std::fill(lastDelayOutput.begin(), lastDelayOutput.end(), 0.0f); //initialize delay buffer
+    
     isPrepared = true;
 }
 
@@ -58,21 +59,18 @@ void DelayData::process(juce::AudioBuffer<float>& buffer)
     }
     
     mixer.mixWetSamples (output);
-
 }
 
-void DelayData::updateParameters(const float delayTime, const float feedback, const float delayMix, double sampleRate)
+void DelayData::updateParameters(const juce::NamedValueSet& paramValues)
 {
-    delay.setDelay(delayTime / 1000.0f * sampleRate);
+    delay.setDelay(static_cast<float>(paramValues["DELAYTIME"]) / 1000.0f * sampleRate);
     
-    const auto feedbackGain = juce::Decibels::decibelsToGain(feedback, -50.0f);
+    const auto feedbackGain = juce::Decibels::decibelsToGain(static_cast<float>(paramValues["FEEDBACK"]), -50.0f);
     
-    mixer.setWetMixProportion(delayMix * 0.5f);
+    mixer.setWetMixProportion(static_cast<float>(paramValues["DELAYMIX"]) * 0.5f);
     
-    for (auto& volume : delayFeedbackVolume)
+    for (auto& volume:delayFeedbackVolume)
         volume.setTargetValue(feedbackGain);
-    
-    
 }
 
 void DelayData::reset()
