@@ -7,7 +7,9 @@ WaveX is a simple monophonic synthesizer created using the JUCE framework.
 
 It features a variety of components that make sound design easy for music producers.
 
+<div align="center">
 <img src="Deliverables/images/WaveX.png" width="500">
+</div>
 
 ## WaveX Features
 - 2 oscillators with gain controls and 3 different wave types (Sine, Saw, Square)
