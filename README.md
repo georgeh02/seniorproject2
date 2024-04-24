@@ -1,4 +1,4 @@
-<img src="Deliverables/images/logo2.png">
+<img src="Deliverables/images/logo3.png">
 
 # [WaveX](https://github.com/georgeh02/seniorproject2)
 Created by George Harrison
