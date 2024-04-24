@@ -1,7 +1,7 @@
 # [WaveX](https://georgeh02.github.io/WaveX/)
 by George Harrison
 
-<img src="Deliverables/images/logo.png" width="500">
+<img src="Deliverables/images/logo1.png">
 
 WaveX is a simple monophonic synthesizer created using the JUCE framework.
 It features a variety of components that make sound design easy.
@@ -30,5 +30,3 @@ It features a variety of components that make sound design easy.
     - For VST3, copy WaveX.vst3 file to "/Library/Audio/Plug-Ins/VST3"
     - For AU, copy WaveX.component file to "/Library/Audio/Plug-Ins/Components"
 - Once your preferred version is installed, simply rescan your DAW and WaveX will be ready to use
-
-SCREENSHOT
