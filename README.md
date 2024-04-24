@@ -21,7 +21,7 @@ It features a variety of components that make sound design easy for music produc
 
 ## Installation Instructions
 ### Standalone
-- WaveX can be easily run in standalone mode by running WaveX.app
+- WaveX can be easily run in standalone mode by running [WaveX.app](https://github.com/georgeh02/seniorproject2/blob/main/WaveX%20Builds/WaveX.app.zip)
 - Preview the sounds you create by using the GUI keyboard
 
 ### Within a DAW
