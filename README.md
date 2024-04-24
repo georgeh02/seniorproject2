@@ -17,7 +17,7 @@ It features a variety of components that make sound design easy.
 - Compatible with MacOS (Standalone, VST3, AU formats)
 - FL Studio and Ableton Live
 
-![WaveX](Deliverables/images/WaveX.png | width=500)
+<img src="Deliverables/images/WaveX.png" width="500">
 
 ## Installation Instructions
 ### Standalone
