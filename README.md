@@ -1,10 +1,12 @@
-# [WaveX](https://georgeh02.github.io/WaveX/)
-by George Harrison
-
 <img src="Deliverables/images/logo1.png">
 
+# [WaveX](https://github.com/georgeh02/seniorproject2)
+George Harrison
+
 WaveX is a simple monophonic synthesizer created using the JUCE framework.
-It features a variety of components that make sound design easy.
+It features a variety of components that make sound design easy for music producers.
+
+<img src="Deliverables/images/WaveX.png" width="500">
 
 ## WaveX Features
 - 2 oscillators with 3 different wave types and gain controls
@@ -16,8 +18,6 @@ It features a variety of components that make sound design easy.
 - A clean and organized GUI with a playable keyboard
 - Compatible with MacOS (Standalone, VST3, AU formats)
 - FL Studio and Ableton Live
-
-<img src="Deliverables/images/WaveX.png" width="500">
 
 ## Installation Instructions
 ### Standalone
