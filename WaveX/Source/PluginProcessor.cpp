@@ -182,7 +182,7 @@ void WaveXAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     limiter.updateParameters({{"THRESHOLD", 0.0f}, {"RELEASE", 0.0f}}); //safety limiter ensures volume isn't too loud
     limiter.process(buffer);
     
-    oscilloscope->pushSamples (buffer);
+    oscilloscope->pushSamples(buffer);
 }
 
 //==============================================================================
