@@ -27,6 +27,6 @@ It features a variety of components that make sound design easy for music produc
 ### Within a DAW
 - WaveX can be used within most DAWs as a third party plugin
 - To use WaveX within your DAW, download your preferred plugin format
-    - For VST3, copy WaveX.vst3 file to "/Library/Audio/Plug-Ins/VST3"
-    - For AU, copy WaveX.component file to "/Library/Audio/Plug-Ins/Components"
+    - For VST3, copy [WaveX.vst3](https://github.com/georgeh02/seniorproject2/blob/main/WaveX%20Builds/WaveX.vst3.zip) to "/Library/Audio/Plug-Ins/VST3"
+    - For AU, copy [WaveX.component](https://github.com/georgeh02/seniorproject2/blob/main/WaveX%20Builds/WaveX.component.zip) to "/Library/Audio/Plug-Ins/Components"
 - Once your preferred version is installed, simply rescan your DAW and WaveX will be ready to use
