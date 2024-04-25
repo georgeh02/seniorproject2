@@ -19,6 +19,7 @@ It features a variety of components that make sound design easy for music produc
 - Reverb module with room size and mix controls
 - Waveform visualizer
 - A clean and organized GUI with a playable keyboard
+- Safety limiter to ensure volume does not go over 0 db
 - Compatible with MacOS (Standalone, VST3, AU formats)
 
 ## Installation Instructions
