@@ -12,7 +12,7 @@
 **7.3.4 Delay and Reverb** \
 **7.3.5 Waveform Visualizer** \
 **7.3.6 Keyboard** \
-**7.4    Contact** \
+**7.4    Contact** 
 
 
 ## 7.1 Installation Instructions
