@@ -1,4 +1,4 @@
-# WaveX - Agile User Stories
+# 4.0 WaveX - Requirements Specification (Agile User Stories)
 
 ## Introduction
 WaveX is a software synthesizer in the VST format (Virtual Studio Technology) designed for music producers and sound designers. WaveX includes a variety of sound design tools to assist with music production.

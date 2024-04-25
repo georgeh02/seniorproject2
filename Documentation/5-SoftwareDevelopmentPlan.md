@@ -1,17 +1,17 @@
-# WaveX - Software Development Plan
+# 5.0 WaveX - Software Development Plan
 ## TABLE OF CONTENTS
-**4.1   Plan Introduction** \
-**4.1.1 Project Deliverables** \
-**4.2   Project Resources** \
-**4.2.1 Hardware Resources** \
-**4.2.2 Software Resources** \
-**4.3   Project Organization** \
-**4.4   Project Schedule** \
-**4.4.1 GANTT Chart** \
-**4.4.2 Task / Resource Table**
+**5.1   Plan Introduction** \
+**5.1.1 Project Deliverables** \
+**5.2   Project Resources** \
+**5.2.1 Hardware Resources** \
+**5.2.2 Software Resources** \
+**5.3   Project Organization** \
+**5.4   Project Schedule** \
+**5.4.1 GANTT Chart** \
+**5.4.2 Task / Resource Table**
 
 
-## 4.1   Plan Introduction
+## 5.1 Plan Introduction
 This Software Development Plan details the planned development for the WaveX softare synthesizer, which provides users with the ability to design sounds for use in music production.
 
 WaveX will feature a variety of sound design tools including 2 oscillators, an ADSR envelope, a filter, reverb and delay effects. These tools will allow a user to
@@ -25,7 +25,7 @@ shape the sound to their liking. Additionally, since WaveX will be made in the V
 - Preliminary Poster (Week 14)
 - Final Product (Week 16)
 
-## 4.1.1 Project Deliverables
+## 5.1.1 Project Deliverables
 - Written Status Report (Every other Monday starting Week 8)
     - Status reports will cover current progress on the project.
     - Accomplishments, scheduled tasks for the next two weeks, and risks / problems will be included as sections
@@ -43,17 +43,17 @@ shape the sound to their liking. Additionally, since WaveX will be made in the V
     - The final version of WaveX will be completed with any additional stretch goals implemented since the preliminary demonstration
     - The project will be presented, along with a finalized poster.
 
-## 4.2   Project Resources
+## 5.2 Project Resources
 This section provides resource information for the WaveX project
 
-## 4.2.1 Hardware Resources
+## 5.2.1 Hardware Resources
 The project will be developed on a 2019 i9 8-core MacBook Pro with 32GB of ram. It will also be tested on a 2021 M1 Max MacBook Pro with 64GB of ram. 
 
 A Native Instruments A49 MIDI controller will be used as well to test MIDI functionality of the project, however is not required to use the software. 
 
 WaveX will only be tested on MacOS, as such it will only officially support the MacOS operating system. The execution of the final project will only require a modern computer running MacOS.
 
-## 4.2.2 Software Resources
+## 5.2.2 Software Resources
 The software / OS planned to be used for this development is listed below
 - MacOS Catalina 10.15.7
 - MacOS Monterey 12.5.1
@@ -62,7 +62,7 @@ The software / OS planned to be used for this development is listed below
 - Ableton Live 11
 - FL Studio 21
 
-## 4.3   Project Organization
+## 5.3 Project Organization
 The major functions of the project are divided as follows. Each function will be completed to meet the functionality listed in the Requirements Specification document.
 - Sound Design
     - This will be the bulk of the project and the first section to be completed
@@ -81,11 +81,11 @@ The major functions of the project are divided as follows. Each function will be
     - LFO
 
 
-## 4.4   Project Schedule
+## 5.4 Project Schedule
 This section provides schedule information for the WaveX project
 
-## 4.4.1 GANTT Chart
-![GANTT CHART](https://github.com/georgeh02/seniorproject2/blob/main/Deliverables/GANTT_V2.png)
+## 5.4.1 GANTT Chart
+![GANTT CHART](./images/GANTT_V2.png)
 
-## 4.4.2 Task / Resource Table
-All tasks will be handled by one person, using all resources mentioned in section 4.2
+## 5.4.2 Task / Resource Table
+All tasks will be handled by one person, using all resources mentioned in section 5.2

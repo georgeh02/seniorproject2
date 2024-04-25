@@ -1,4 +1,4 @@
-<img src="Deliverables/images/logo1.png">
+<img src="Documentation/images/logo1.png">
 
 # [WaveX](https://github.com/georgeh02/seniorproject2)
 Created by George Harrison
@@ -8,7 +8,7 @@ WaveX is a simple monophonic synthesizer created using the JUCE framework.
 It features a variety of components that make sound design easy for music producers.
 
 <div align="center">
-<img src="Deliverables/images/WaveX.png" width="500">
+<img src="Documentation/images/WaveX.png" width="500">
 </div>
 
 ## WaveX Features
