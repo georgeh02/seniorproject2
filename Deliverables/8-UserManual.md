@@ -22,6 +22,7 @@ WaveX is supported on MacOS 10.15 and later. It can be installed as either a sta
 <div align="center">
 <img src="images/SecurityWarning.png" width="500">
 </div>
+
 - Navigate to security and privacy settings and click 'open anyway'
 <div align="center">
 <img src="images/Settings.png" width="500">
