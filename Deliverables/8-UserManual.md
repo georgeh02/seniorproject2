@@ -53,7 +53,7 @@ This section describes in detail the functionality of WaveX's features
 
 ## 5.3.1 Oscillators
 <div align="center">
-<img src="Deliverables/images/osc.png" width="500">
+<img src="/images/osc.png" width="500">
 </div>
 
 - WaveX includes two oscillators.
@@ -63,7 +63,7 @@ This section describes in detail the functionality of WaveX's features
 
 ## 5.3.2 ADSR Envelope
 <div align="center">
-<img src="Deliverables/images/adsr.png" width="500">
+<img src="/images/adsr.png" width="500">
 </div>
 
 - The ADSR envelope is applied to the mixed output of the oscillators
@@ -71,7 +71,7 @@ This section describes in detail the functionality of WaveX's features
 
 ## 5.3.3 Filter
 <div align="center">
-<img src="Deliverables/images/filter.png" width="500">
+<img src="/images/filter.png" width="500">
 </div>
 
 - The filter has three types that can be selected from the drop down
@@ -81,7 +81,7 @@ This section describes in detail the functionality of WaveX's features
 
 ## 5.3.4 Delay and Reverb
 <div align="center">
-<img src="Deliverables/images/fx.png" width="500">
+<img src="/images/fx.png" width="500">
 </div>
 
 ### Delay
@@ -96,7 +96,7 @@ This section describes in detail the functionality of WaveX's features
 
 ## 5.3.5 Waveform Visualizer
 <div align="center">
-<img src="Deliverables/images/waveform.png" width="500">
+<img src="/images/waveform.png" width="500">
 </div>
 
 - The waveform visualizer allows you to see a visual representation of your sound as you design and play it
@@ -104,7 +104,7 @@ This section describes in detail the functionality of WaveX's features
 
 ## 5.3.6 GUI Keyboard
 <div align="center">
-<img src="Deliverables/images/keyboard.png" width="500">
+<img src="/images/keyboard.png" width="500">
 </div>
 
 - The GUI keyboard allows you to preview your sounds without needing a MIDI keyboard
